@@ -76,7 +76,7 @@ export default function Home() {
             Muhammad Rido Ramdene
           </h1>
           <p className="animate-fade-up animation-delay-100 mt-4 text-lg text-gray-400">
-            Creator Digital & Operator Pesantren
+            S1 Sistem Informasi
           </p>
           <a
             href="#contact"
