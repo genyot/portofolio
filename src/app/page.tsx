@@ -1,6 +1,6 @@
 import Image from "next/image";
 import DesignGallery from "@/components/DesignGallery";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, FileText, MonitorSmartphone, Palette, BookOpen } from "lucide-react";
 import {
   FaInstagram,
   FaGithub,
@@ -35,6 +35,34 @@ const experiences = [
     title: "Operator",
     company: "Pondok Pesantren Daarul Jalal",
     description: "Menangani urusan administrasi, pengelolaan data santri, dan operasional teknis harian di lingkungan pondok pesantren.",
+  },
+  {
+    title: "Manajemen Pendakian Gunung",
+    company: "Freelance",
+    description: "Berpengalaman dalam mengorganisir, merencanakan, dan mengelola kegiatan pendakian gunung, mencakup penyediaan logistik, pemetaan rute, dan manajemen keselamatan tim.",
+  },
+];
+
+const services = [
+  {
+    title: "Tugas Kuliah & Skripsi",
+    description: "Jasa pembuatan skripsi, makalah, jurnal, presentasi, dan tugas akademik lainnya secara terstruktur dan rapi.",
+    icon: BookOpen,
+  },
+  {
+    title: "Undangan Digital",
+    description: "Desain website undangan pernikahan atau acara spesial yang elegan, responsif, dan siap disebar ke tamu undangan.",
+    icon: MonitorSmartphone,
+  },
+  {
+    title: "Pembuatan CV / Resume",
+    description: "Jasa merapikan dan mendesain Curriculum Vitae yang profesional, baik format ATS-friendly maupun format desain kreatif.",
+    icon: FileText,
+  },
+  {
+    title: "Jasa Desain Visual",
+    description: "Menerima jasa pembuatan poster, logo, banner, konten sosial media, dan berbagai kebutuhan desain grafis lainnya.",
+    icon: Palette,
   },
 ];
 
@@ -195,6 +223,30 @@ export default function Home() {
               </p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Services / Open Jasa */}
+      <section className="mx-auto max-w-6xl px-6 pb-32 relative z-10">
+        <div className="text-center md:text-left mb-16 animate-fade-up">
+          <h2 className="font-serif text-4xl font-bold">Layanan Jasa</h2>
+          <p className="mt-4 text-gray-400">Open jasa untuk berbagai kebutuhan tugas dan desain.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          {services.map((svc, i) => {
+            const Icon = svc.icon;
+            return (
+              <div key={i} className="glass-card animate-fade-up group relative p-8" style={{ animationDelay: `${(i % 4) * 100}ms` }}>
+                <div className="mb-6 inline-flex rounded-xl bg-cyan-400/10 p-4 text-cyan-400 transition-transform duration-500 group-hover:scale-110 group-hover:bg-cyan-400/20 shadow-[0_0_20px_rgba(34,211,238,0.1)]">
+                  <Icon size={32} />
+                </div>
+                <h3 className="mb-3 font-serif text-2xl font-bold text-white">{svc.title}</h3>
+                <p className="leading-relaxed text-gray-400 group-hover:text-gray-300 transition-colors">
+                  {svc.description}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </section>
 
