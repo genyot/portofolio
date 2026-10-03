@@ -64,6 +64,11 @@ const experiences = [
     company: "Freelance",
     description: "Berpengalaman dalam mengorganisir, merencanakan, dan mengelola kegiatan pendakian gunung, mencakup penyediaan logistik, pemetaan rute, dan manajemen keselamatan tim.",
   },
+  {
+    title: "Jasa Desain & Joki Tugas",
+    company: "Freelance",
+    description: "Menerima jasa desain grafis (spanduk, poster, undangan digital) serta membantu penyelesaian tugas akademik (joki tugas kuliah, makalah, skripsi).",
+  },
 ];
 
 const services = [
@@ -93,6 +98,7 @@ const navLinks = [
   { href: "#about", label: "About" },
   { href: "#portfolio", label: "Portfolio" },
   { href: "#music", label: "Music" },
+  { href: "#experience", label: "Experience" },
   { href: "#services", label: "Jasa" },
   { href: "#sosial", label: "Sosial" },
   { href: "#contact", label: "Contact" },
@@ -257,7 +263,7 @@ export default function Home() {
       </div>
 
       {/* Experience Timeline */}
-      <section className="mx-auto max-w-4xl px-5 py-20 relative z-10 md:py-32">
+      <section id="experience" className="mx-auto max-w-4xl px-5 py-20 relative z-10 md:py-32">
         <h2 className="animate-fade-up mb-10 font-serif text-3xl font-bold md:mb-16 md:text-4xl">Experience</h2>
         <div className="space-y-6 md:space-y-10">
           {experiences.map((exp, i) => (
