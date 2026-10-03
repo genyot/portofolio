@@ -1,7 +1,7 @@
 import Image from "next/image";
 import DesignGallery from "@/components/DesignGallery";
 import MusicPlayer from "@/components/MusicPlayer";
-import { Mail, Phone, FileText, MonitorSmartphone, Palette, BookOpen, Camera } from "lucide-react";
+import { Mail, Phone, FileText, MonitorSmartphone, Palette, BookOpen, Camera, Scissors, Video } from "lucide-react";
 import {
   FaInstagram,
   FaGithub,
@@ -21,7 +21,7 @@ import {
   FaThreads,
   FaTiktok,
 } from "react-icons/fa6";
-import { SiMysql, SiCanva, SiCapcut } from "react-icons/si";
+import { SiMysql } from "react-icons/si";
 
 const skills = [
   { name: "Laravel", icon: FaLaravel, highlight: false },
@@ -31,8 +31,8 @@ const skills = [
   { name: "Microsoft Excel", icon: FaFileExcel, highlight: false },
   { name: "Pixellab", icon: FaPaintBrush, highlight: false },
   { name: "CorelDRAW", icon: FaPenNib, highlight: false },
-  { name: "Canva", icon: SiCanva, highlight: false },
-  { name: "CapCut", icon: SiCapcut, highlight: false },
+  { name: "Canva", icon: Palette, highlight: false },
+  { name: "CapCut", icon: Scissors, highlight: false },
   { name: "Fotografer", icon: Camera, highlight: false },
 ];
 
