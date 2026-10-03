@@ -1,5 +1,6 @@
 import Image from "next/image";
 import DesignGallery from "@/components/DesignGallery";
+import MusicPlayer from "@/components/MusicPlayer";
 import { Mail, Phone, FileText, MonitorSmartphone, Palette, BookOpen, Camera } from "lucide-react";
 import {
   FaInstagram,
@@ -91,6 +92,7 @@ const services = [
 const navLinks = [
   { href: "#about", label: "About" },
   { href: "#portfolio", label: "Portfolio" },
+  { href: "#music", label: "Music" },
   { href: "#services", label: "Jasa" },
   { href: "#contact", label: "Contact" },
 ];
@@ -256,6 +258,10 @@ export default function Home() {
 
       <div className="animate-fade-up relative z-10">
         <DesignGallery />
+      </div>
+
+      <div id="music">
+        <MusicPlayer />
       </div>
 
       {/* Experience Timeline */}
