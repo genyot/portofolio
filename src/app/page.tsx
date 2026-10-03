@@ -125,63 +125,68 @@ export default function Home() {
 
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-5 pt-10 pb-16 md:pt-20 md:pb-0">
-        <div className="flex flex-col items-center gap-8 md:grid md:grid-cols-2 md:items-center md:gap-12">
+        {/* Grid: selalu 2 kolom (kiri: teks, kanan: foto) */}
+        <div className="grid grid-cols-2 items-center gap-4 md:gap-12">
 
-          {/* Foto — tampil duluan di mobile */}
-          <div className="order-1 md:order-2 animate-fade-up animation-delay-200 w-full flex justify-center md:justify-end">
-            <div className="animate-float">
-              <div className="relative mx-auto h-52 w-52 overflow-hidden rounded-full border border-white/15 shadow-[0_0_40px_rgba(34,211,238,0.15)] sm:h-64 sm:w-64 md:h-[300px] md:w-[300px]">
+          {/* Teks — kiri */}
+          <div className="animate-fade-up text-left">
+            <h1 className="font-serif text-2xl font-bold leading-tight sm:text-4xl md:text-6xl lg:text-7xl">
+              <span className="text-base text-gray-400 sm:text-2xl md:text-5xl">I&apos;M </span>
+              <br />
+              Muhammad Rido Ramdene
+            </h1>
+            <p className="animate-fade-up animation-delay-100 mt-2 text-xs text-gray-400 sm:text-base md:mt-3 md:text-lg">
+              S1 Sistem Informasi
+            </p>
+            <div className="animate-fade-up animation-delay-200 mt-4 flex flex-wrap gap-2 md:mt-6 md:gap-3">
+              <a
+                href="#contact"
+                className="glass-button rounded-lg px-3 py-2 text-xs font-medium text-white sm:px-6 sm:py-3 sm:text-sm"
+              >
+                Contact Me
+              </a>
+              <a
+                href="#portfolio"
+                className="rounded-lg border border-white/10 px-3 py-2 text-xs font-medium text-gray-300 transition hover:border-cyan-400/40 hover:text-cyan-400 sm:px-6 sm:py-3 sm:text-sm"
+              >
+                Karya
+              </a>
+            </div>
+
+            {/* Social icons */}
+            <div className="animate-fade-up animation-delay-300 mt-5 flex gap-2 md:gap-4">
+              <a href="https://github.com/genyot" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
+                <FaGithub size={14} className="sm:w-5 sm:h-5" />
+              </a>
+              <a href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
+                <FaLinkedin size={14} className="sm:w-5 sm:h-5" />
+              </a>
+              <a href="https://www.instagram.com/g3ny0t" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
+                <FaInstagram size={14} className="sm:w-5 sm:h-5" />
+              </a>
+              <a href="https://wa.me/+6281917320266" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
+                <FaWhatsapp size={14} className="sm:w-5 sm:h-5" />
+              </a>
+            </div>
+          </div>
+
+          {/* Foto — kanan, dengan gradasi di belakang */}
+          <div className="animate-fade-up animation-delay-200 flex justify-center md:justify-end">
+            <div className="animate-float relative flex items-center justify-center">
+              {/* Gradasi blob di belakang foto */}
+              <div className="absolute inset-0 -z-10 scale-110 rounded-full bg-gradient-to-br from-cyan-500/40 via-violet-500/30 to-pink-500/20 blur-2xl" />
+              <div className="absolute inset-0 -z-10 scale-95 rounded-full bg-gradient-to-tr from-indigo-600/30 to-cyan-400/20 blur-xl" />
+
+              <div className="relative h-36 w-36 overflow-hidden rounded-full border border-white/20 shadow-[0_0_30px_rgba(34,211,238,0.2)] sm:h-52 sm:w-52 md:h-[300px] md:w-[300px]">
                 <Image
                   src="/images/profile.jpg"
                   alt="Foto profil"
                   fill
                   priority
                   className="object-cover"
-                  sizes="(max-width: 640px) 208px, (max-width: 768px) 256px, 300px"
+                  sizes="(max-width: 640px) 144px, (max-width: 768px) 208px, 300px"
                 />
               </div>
-            </div>
-          </div>
-
-          {/* Teks */}
-          <div className="order-2 md:order-1 text-center md:text-left">
-            <h1 className="animate-fade-up font-serif text-4xl font-bold leading-tight sm:text-5xl md:text-6xl lg:text-7xl">
-              <span className="text-2xl text-gray-400 sm:text-3xl md:text-5xl">I&apos;M </span>
-              <br />
-              Muhammad Rido Ramdene
-            </h1>
-            <p className="animate-fade-up animation-delay-100 mt-3 text-base text-gray-400 sm:text-lg">
-              S1 Sistem Informasi
-            </p>
-            <div className="animate-fade-up animation-delay-200 mt-6 flex flex-wrap items-center justify-center gap-3 md:justify-start">
-              <a
-                href="#contact"
-                className="glass-button rounded-lg px-6 py-3 text-sm font-medium text-white"
-              >
-                Contact Me
-              </a>
-              <a
-                href="#portfolio"
-                className="rounded-lg border border-white/10 px-6 py-3 text-sm font-medium text-gray-300 transition hover:border-cyan-400/40 hover:text-cyan-400"
-              >
-                Lihat Karya
-              </a>
-            </div>
-
-            {/* Social icons — desktop only (floating version dihapus) */}
-            <div className="animate-fade-up animation-delay-300 mt-8 hidden justify-start gap-4 md:flex">
-              <a href="https://github.com/genyot" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
-                <FaGithub size={18} />
-              </a>
-              <a href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
-                <FaLinkedin size={18} />
-              </a>
-              <a href="https://www.instagram.com/g3ny0t" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
-                <FaInstagram size={18} />
-              </a>
-              <a href="https://wa.me/+6281917320266" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
-                <FaWhatsapp size={18} />
-              </a>
             </div>
           </div>
 
