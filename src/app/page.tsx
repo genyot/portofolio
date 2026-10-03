@@ -1,7 +1,8 @@
 import Image from "next/image";
 import DesignGallery from "@/components/DesignGallery";
 import MusicPlayer from "@/components/MusicPlayer";
-import { Mail, Phone, FileText, MonitorSmartphone, Palette, BookOpen, Camera, Scissors, Video } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import { Mail, Phone, FileText, MonitorSmartphone, Palette, BookOpen, Camera, Scissors, Video, SlidersHorizontal, Aperture } from "lucide-react";
 import {
   FaInstagram,
   FaGithub,
@@ -34,6 +35,8 @@ const skills = [
   { name: "Canva", icon: Palette, highlight: false },
   { name: "CapCut", icon: Scissors, highlight: false },
   { name: "Fotografer", icon: Camera, highlight: false },
+  { name: "Adobe Lightroom", icon: Aperture, highlight: false },
+  { name: "Snapseed", icon: SlidersHorizontal, highlight: false },
 ];
 
 const socials = [
@@ -94,16 +97,6 @@ const services = [
   },
 ];
 
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#music", label: "Music" },
-  { href: "#experience", label: "Experience" },
-  { href: "#services", label: "Jasa" },
-  { href: "#sosial", label: "Sosial" },
-  { href: "#contact", label: "Contact" },
-];
-
 export default function Home() {
   return (
     <main className="min-h-screen text-white selection:bg-cyan-500/30 selection:text-white relative">
@@ -114,39 +107,7 @@ export default function Home() {
         <div className="liquid-blob liquid-blob-3"></div>
       </div>
 
-      {/* Navbar */}
-      <nav className="glass-navbar sticky top-0 z-50 w-full px-5 py-4 md:px-12">
-        <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <a href="#" className="animate-fade-up font-serif text-2xl font-bold text-white md:text-3xl">
-            MR<span className="text-cyan-400">.</span>
-          </a>
-
-          {/* Desktop Nav */}
-          <div className="animate-fade-up animation-delay-100 hidden gap-8 text-sm font-medium text-gray-300 md:flex">
-            {navLinks.map((link) => (
-              <a key={link.href} href={link.href} className="hover:text-cyan-400 transition-colors">
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile: hapus social icons, ganti tombol contact */}
-          <div className="flex items-center md:hidden">
-            <a href="#contact" className="glass-button rounded-lg px-4 py-2 text-xs font-medium text-white">
-              Contact
-            </a>
-          </div>
-        </div>
-
-        {/* Mobile: bottom nav links */}
-        <div className="mt-3 flex justify-center gap-6 text-xs font-medium text-gray-400 md:hidden">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="hover:text-cyan-400 transition-colors py-1">
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero */}
       <section className="mx-auto max-w-6xl px-5 pt-10 pb-16 md:pt-20 md:pb-0">
