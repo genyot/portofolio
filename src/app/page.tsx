@@ -1,391 +1,226 @@
 import Image from "next/image";
 import DesignGallery from "@/components/DesignGallery";
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import {
   FaInstagram,
   FaGithub,
   FaLinkedin,
   FaWhatsapp,
+  FaLaravel,
+  FaPhp,
 } from "react-icons/fa";
+import { 
+  SiMysql, 
+  SiJavascript, 
+  SiTypescript, 
+  SiNextdotjs, 
+  SiTailwindcss, 
+  SiFigma 
+} from "react-icons/si";
+
+const skills = [
+  { name: "Laravel", icon: FaLaravel, highlight: false },
+  { name: "PHP", icon: FaPhp, highlight: false },
+  { name: "MySQL", icon: SiMysql, highlight: false },
+  { name: "JavaScript", icon: SiJavascript, highlight: true },
+  { name: "TypeScript", icon: SiTypescript, highlight: false },
+  { name: "Next.js", icon: SiNextdotjs, highlight: false },
+  { name: "Tailwind CSS", icon: SiTailwindcss, highlight: false },
+  { name: "UI/UX Design", icon: SiFigma, highlight: false },
+];
+
 const projects = [
   {
     title: "Media Digital UNU NTB",
-    description:
-      "Media digital berbasis web untuk dokumentasi dan publikasi karya ilmiah dosen dan mahasiswa.",
-    tech: ["Laravel", "PHP", "MySQL"],
+    role: "Fullstack Developer",
+    description: "Media digital berbasis web untuk dokumentasi dan publikasi karya ilmiah dosen dan mahasiswa.",
   },
   {
     title: "Sistem Informasi",
-    description:
-      "Pengembangan sistem informasi berbasis web dengan fokus pada pengelolaan data dan pengalaman pengguna.",
-    tech: ["PHP", "Laravel", "MySQL"],
+    role: "Web Developer",
+    description: "Pengembangan sistem informasi berbasis web dengan fokus pada pengelolaan data dan pengalaman pengguna.",
   },
   {
-    title: "UI/UX Design",
-    description:
-      "Perancangan antarmuka dan pengalaman pengguna untuk aplikasi berbasis web.",
-    tech: ["Figma", "UI Design", "UX"],
+    title: "Perancangan UI/UX",
+    role: "UI/UX Designer",
+    description: "Perancangan antarmuka dan pengalaman pengguna untuk berbagai aplikasi berbasis web.",
   },
-];
-
-const skills = [
-  "Laravel",
-  "PHP",
-  "MySQL",
-  "JavaScript",
-  "TypeScript",
-  "Next.js",
-  "Tailwind CSS",
-  "UI/UX Design",
 ];
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#07070a] text-white">
-      {/* Neon Background */}
-<div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-  {/* Purple */}
-  <div className="absolute -left-32 -top-32 h-[420px] w-[420px] rounded-full bg-purple-600/70 blur-[100px]" />
-
-  {/* Blue */}
-  <div className="absolute -right-32 top-10 h-[420px] w-[420px] rounded-full bg-blue-600/60 blur-[110px]" />
-
-  {/* Pink */}
-  <div className="absolute bottom-[-150px] left-[30%] h-[450px] w-[450px] rounded-full bg-fuchsia-600/60 blur-[120px]" />
-
-  {/* Violet */}
-  <div className="absolute right-[15%] top-[45%] h-[300px] w-[300px] rounded-full bg-violet-500/40 blur-[100px]" />
-</div>
+    <main className="min-h-screen bg-[#1e1e1e] text-white selection:bg-yellow-400 selection:text-black">
       {/* Navbar */}
-      <nav className="fixed top-0 z-50 w-full border-b border-black/5 bg-white/60 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#" className="text-xl font-bold">
-  Muhammad Rido Ramdene<span className="text-zinc-500">.</span>
-</a>
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8">
+        <a href="#" className="font-serif text-3xl font-bold text-yellow-400">
+          R<span className="text-white">.</span>
+        </a>
 
-          <div className="hidden gap-8 text-sm text-zinc-600 md:flex">
-            <a href="#about" className="hover:text-white">
-              About
-            </a>
-            <a href="#skills" className="hover:text-white">
-              Skills
-            </a>
-            <a href="#projects" className="hover:text-white">
-              Projects
-            </a>
-            <a href="#contact" className="hover:text-white">
-              Contact
-            </a>
-          </div>
+        <div className="hidden gap-8 text-sm font-medium text-gray-300 md:flex">
+          <a href="#about" className="hover:text-yellow-400 transition-colors">
+            About
+          </a>
+          <a href="#portfolio" className="hover:text-yellow-400 transition-colors">
+            Portfolio
+          </a>
+          <a href="#contact" className="hover:text-yellow-400 transition-colors">
+            Contact
+          </a>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="mx-auto flex min-h-screen max-w-6xl items-center px-6 pt-20">
-  <div className="grid w-full items-center gap-12 md:grid-cols-[320px_1fr]">
+      <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-12 md:grid-cols-2 md:pt-20">
+        <div className="max-w-xl">
+          <h1 className="font-serif text-5xl font-bold leading-tight md:text-7xl">
+            <span className="text-gray-400 text-3xl md:text-5xl">I&apos;M </span>
+            <br />
+            Muhammad Rido
+          </h1>
+          <p className="mt-4 text-lg text-gray-400">
+            Web Developer & UI/UX Designer
+          </p>
+          <a
+            href="#contact"
+            className="mt-8 inline-block rounded-md border border-yellow-400 px-8 py-3 text-sm font-medium text-yellow-400 transition hover:bg-yellow-400 hover:text-black"
+          >
+            Contact Me
+          </a>
+        </div>
 
-    {/* Foto */}
-    <div className="relative mx-auto h-[360px] w-[280px] overflow-hidden rounded-2xl bg-zinc-900 md:mx-0">
-      <Image
-        src="/images/profile.jpg"
-        alt="Foto profil"
-        fill
-        priority
-        className="object-cover"
-        sizes="280px"
-      />
-    </div>
-
-    {/* Teks */}
-    <div className="max-w-4xl">
-
-      <p className="animate-fade-up mb-5 text-sm font-medium uppercase tracking-[0.3em] text-zinc-500">
-        Pengen jadi software engineer & Designer
-      </p>
-
-      <h1 className="animate-fade-up animation-delay-100 text-5xl font-bold leading-tight tracking-tight md:text-7xl">
-        Membangun website yang
-        <span className="text-zinc-500"> fungsional </span>
-        dan menarik.
-      </h1>
-
-      <p className="animate-fade-up animation-delay-200 mt-8 max-w-2xl text-lg leading-8 text-zinc-400">
-        Saya pengen jadi software engineer dan desainer.
-      </p>
-
-      <div className="animate-fade-up animation-delay-300 mt-10 flex flex-wrap gap-4">
-        <a
-          href="#design"
-          className="rounded-full bg-white px-6 py-3 text-sm font-medium text-black transition duration-300 hover:-translate-y-1 hover:bg-zinc-200"
-        >
-          Lihat Karya
-        </a>
-
-        <a
-          href="#contact"
-          className="rounded-full border border-white/20 px-6 py-3 text-sm font-medium transition duration-300 hover:-translate-y-1 hover:bg-white/10"
-        >
-          Hubungi Saya
-        </a>
-      </div>
-
-    </div>
-  </div>
-</section>
+        <div className="relative mx-auto w-full max-w-md md:ml-auto">
+          <div className="relative aspect-[3/4] w-[85%] overflow-hidden rounded-t-full bg-zinc-800">
+            <Image
+              src="/images/profile.jpg"
+              alt="Foto profil"
+              fill
+              priority
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+          
+          {/* Floating Socials */}
+          <div className="absolute bottom-12 right-0 flex flex-col gap-6 text-gray-400">
+            <a href="https://github.com/genyot" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors">
+              <FaGithub size={20} />
+            </a>
+            <a href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors">
+              <FaLinkedin size={20} />
+            </a>
+            <a href="https://www.instagram.com/g3ny0t" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors">
+              <FaInstagram size={20} />
+            </a>
+            <a href="https://wa.me/+6281917320266" target="_blank" rel="noopener noreferrer" className="hover:text-yellow-400 transition-colors">
+              <FaWhatsapp size={20} />
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* About */}
-      <section id="about" className="border-t border-white/10">
-        <div className="mx-auto grid max-w-6xl gap-12 px-6 py-32 md:grid-cols-2">
-          <div>
-            <p className="mb-3 text-sm uppercase tracking-[0.3em] text-zinc-500">
-              About Me
-            </p>
-            <h2 className="text-4xl font-bold">
-              Tentang saya.
-            </h2>
-          </div>
-
-          <div className="space-y-5 text-zinc-400 leading-8">
-            <p>
-              Saya memiliki ketertarikan pada pengembangan teknologi berbasis
-              web dan desain antarmuka.
-            </p>
-
-            <p>
-              Dalam proses pengembangan sebuah website, saya tidak hanya
-              memperhatikan bagaimana sistem bekerja, tetapi juga bagaimana
-              pengguna berinteraksi dengan sistem tersebut.
-            </p>
-
-            <p>
-              Saya senang mempelajari teknologi baru dan mengubah ide menjadi
-              produk digital yang dapat digunakan.
-            </p>
-          </div>
+      <section id="about" className="mx-auto max-w-6xl px-6 py-32">
+        <h2 className="mb-8 font-serif text-4xl font-bold">About</h2>
+        <div className="flex gap-6">
+          <div className="mt-2 h-1 w-12 shrink-0 bg-yellow-400" />
+          <p className="max-w-3xl text-gray-400 leading-relaxed">
+            Saya memiliki ketertarikan pada pengembangan teknologi berbasis web dan desain antarmuka. 
+            Dalam proses pengembangan sebuah website, saya tidak hanya memperhatikan bagaimana sistem bekerja, 
+            tetapi juga bagaimana pengguna berinteraksi dengan sistem tersebut. Saya <span className="text-yellow-400">senang mempelajari teknologi baru</span> dan 
+            mengubah ide menjadi produk digital yang fungsional.
+          </p>
         </div>
       </section>
-<DesignGallery />
+
       {/* Skills */}
-      <section id="skills" className="border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-6 py-32">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-zinc-500">
-            Skills
-          </p>
-
-          <h2 className="mb-12 text-4xl font-bold">
-            Teknologi yang saya gunakan.
-          </h2>
-
-          <div className="flex flex-wrap gap-3">
-            {skills.map((skill) => (
-              <span
-                key={skill}
-                className="rounded-full border border-white/10 px-5 py-3 text-sm text-zinc-300"
+      <section className="mx-auto max-w-6xl px-6 pb-32">
+        <h2 className="mb-12 text-center font-serif text-4xl font-bold md:text-left">My Skills</h2>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:gap-6">
+          {skills.map((skill) => {
+            const Icon = skill.icon;
+            return (
+              <div
+                key={skill.name}
+                className={`flex aspect-square flex-col items-center justify-center gap-4 rounded-2xl transition-transform hover:-translate-y-1 ${
+                  skill.highlight ? "bg-yellow-400 text-black shadow-[0_0_40px_rgba(250,204,21,0.3)]" : "bg-[#2a2b2f] text-gray-300"
+                }`}
               >
-                {skill}
-              </span>
-            ))}
-          </div>
+                <Icon size={48} className={skill.highlight ? "text-black" : "text-gray-400"} />
+                <span className="text-sm font-medium">{skill.name}</span>
+              </div>
+            );
+          })}
         </div>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="border-t border-white/10">
-        <div className="mx-auto max-w-6xl px-6 py-32">
-          <p className="mb-3 text-sm uppercase tracking-[0.3em] text-zinc-500">
-            Selected Projects
-          </p>
+      {/* Portfolio Header */}
+      <div id="portfolio" className="pt-20 text-center">
+        <h2 className="font-serif text-4xl font-bold">Portfolio</h2>
+        <div className="mt-4 flex justify-center gap-2 text-yellow-400">
+          <span className="h-2 w-2 rounded-full bg-yellow-400" />
+          <span className="h-2 w-2 rounded-full bg-yellow-400/50" />
+          <span className="h-2 w-2 rounded-full bg-yellow-400/30" />
+          <span className="h-2 w-2 rounded-full bg-yellow-400/10" />
+        </div>
+      </div>
 
-          <h2 className="mb-12 text-4xl font-bold">
-            Beberapa project saya.
-          </h2>
+      <DesignGallery />
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {projects.map((project) => (
-              <article
-  key={project.title}
-  className="group rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition-all duration-500 ease-out hover:-translate-y-2 hover:border-white/20 hover:bg-white/[0.06]"
->
-                <div className="mb-10 flex h-40 items-center justify-center rounded-xl bg-zinc-900">
-                  <span className="text-sm text-zinc-600">
-                    Project Preview
-                  </span>
-                </div>
+      {/* Experience / Projects Timeline */}
+      <section className="mx-auto max-w-4xl px-6 py-32">
+        <h2 className="mb-16 font-serif text-4xl font-bold">Experience</h2>
+        <div className="space-y-12 border-l border-white/10 pl-8">
+          {projects.map((project, i) => (
+            <div key={i} className="relative">
+              {/* Timeline Dot */}
+              <div className="absolute -left-[41px] top-1 h-4 w-4 rounded-full border-4 border-[#1e1e1e] bg-yellow-400" />
+              
+              <div className="absolute -left-[100px] top-0 hidden md:block">
+                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-gray-300">
+                  Project
+                </span>
+              </div>
 
-                <h3 className="text-xl font-semibold">
-                  {project.title}
-                </h3>
-
-                <p className="mt-3 text-sm leading-6 text-zinc-400">
-                  {project.description}
-                </p>
-
-                <div className="mt-6 flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-full bg-white/5 px-3 py-1 text-xs text-zinc-400"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </article>
-            ))}
-          </div>
+              <h3 className="text-xl font-bold text-white">{project.title}</h3>
+              <p className="mt-1 text-sm text-yellow-400">{project.role}</p>
+              <p className="mt-4 text-sm leading-relaxed text-gray-400">
+                {project.description}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Contact */}
-<section id="contact" className="border-t border-white/10">
-  <div className="mx-auto w-full max-w-6xl px-6 py-32">
-    {/* Heading */}
-    <div className="mb-12">
-      <p className="mb-3 text-sm uppercase tracking-[0.3em] text-zinc-500">
-        Contact
-      </p>
-
-      <h2 className="max-w-3xl text-4xl font-bold tracking-tight md:text-6xl">
-        Mari membuat sesuatu
-        <span className="text-zinc-500"> bersama.</span>
-      </h2>
-
-      <p className="mt-6 max-w-2xl text-base leading-7 text-zinc-400">
-        Terbuka untuk diskusi mengenai project, kolaborasi, maupun
-        pengembangan website dan produk digital.
-      </p>
-    </div>
-
-    {/* Contact Cards */}
-    <div className="grid w-full grid-cols-1 gap-3 sm:grid-cols-2">
-      {/* Email */}
-      <a
-        href="mailto:ridhoramdana985@gmail.com"
-        className="group rounded-2xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-purple-400/40 hover:bg-white/[0.08] hover:shadow-[0_0_30px_rgba(168,85,247,0.15)]"
-      >
-        <div className="flex items-center gap-4">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-            <Mail size={20} />
+      <section id="contact" className="border-t border-white/5 bg-[#1a1a1a]">
+        <div className="mx-auto max-w-4xl px-6 py-24 text-center">
+          <h2 className="mb-12 font-serif text-4xl font-bold">Contact Me</h2>
+          
+          <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-12">
+            <a href="mailto:ridhoramdana985@gmail.com" className="flex items-center gap-3 text-gray-400 hover:text-yellow-400">
+              <div className="rounded-full bg-[#2a2b2f] p-3">
+                <Mail size={20} />
+              </div>
+              <span className="text-sm">ridhoramdana985@gmail.com</span>
+            </a>
+            
+            <a href="https://wa.me/+6281917320266" className="flex items-center gap-3 text-gray-400 hover:text-yellow-400">
+              <div className="rounded-full bg-[#2a2b2f] p-3">
+                <Phone size={20} />
+              </div>
+              <span className="text-sm">+62 819-1732-0266</span>
+            </a>
           </div>
 
-          <div>
-            <p className="text-xs uppercase tracking-widest text-zinc-500">
-              Email
-            </p>
-
-            <p className="mt-1 text-sm text-zinc-300 transition group-hover:text-white">
-              ridhoramdana985@gmail.com
-            </p>
+          <div className="mt-16 flex justify-center gap-6 text-gray-500">
+            <a href="https://github.com/genyot" className="hover:text-yellow-400"><FaGithub size={20} /></a>
+            <a href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba" className="hover:text-yellow-400"><FaLinkedin size={20} /></a>
+            <a href="https://wa.me/+6281917320266" className="hover:text-yellow-400"><FaWhatsapp size={20} /></a>
           </div>
+          
+          <p className="mt-12 font-serif text-yellow-400/80">&quot;Thanks for Scrolling&quot;</p>
         </div>
-      </a>
-
-      {/* WhatsApp */}
-      <a
-        href="https://wa.me/+6281917320266"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group rounded-2xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-green-400/40 hover:bg-white/[0.08] hover:shadow-[0_0_30px_rgba(34,197,94,0.15)]"
-      >
-        <div className="flex items-center gap-4">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-            <FaWhatsapp size={22} />
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-widest text-zinc-500">
-              WhatsApp
-            </p>
-
-            <p className="mt-1 text-sm text-zinc-300 transition group-hover:text-white">
-              Chat dengan saya
-            </p>
-          </div>
-        </div>
-      </a>
-
-      {/* Instagram */}
-      <a
-        href="https://www.instagram.com/g3ny0t?utm_source=qr&stkn=ejEwZ2YzbDJnamE3"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group rounded-2xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-pink-400/40 hover:bg-white/[0.08] hover:shadow-[0_0_30px_rgba(236,72,153,0.15)]"
-      >
-        <div className="flex items-center gap-4">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-            <FaInstagram size={22} />
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-widest text-zinc-500">
-              Instagram
-            </p>
-
-            <p className="mt-1 text-sm text-zinc-300 transition group-hover:text-white">
-              @g3ny0t
-            </p>
-          </div>
-        </div>
-      </a>
-
-      {/* GitHub */}
-      <a
-        href="https://github.com/genyot"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group rounded-2xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-blue-400/40 hover:bg-white/[0.08] hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]"
-      >
-        <div className="flex items-center gap-4">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-            <FaGithub size={22} />
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-widest text-zinc-500">
-              GitHub
-            </p>
-
-            <p className="mt-1 text-sm text-zinc-300 transition group-hover:text-white">
-              @genyot
-            </p>
-          </div>
-        </div>
-      </a>
-
-      {/* LinkedIn */}
-      <a
-        href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba?trk=contact-info"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group rounded-2xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-xl transition duration-300 hover:-translate-y-1 hover:border-cyan-400/40 hover:bg-white/[0.08] hover:shadow-[0_0_30px_rgba(34,211,238,0.15)]"
-      >
-        <div className="flex items-center gap-4">
-          <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
-            <FaLinkedin size={22} />
-          </div>
-
-          <div>
-            <p className="text-xs uppercase tracking-widest text-zinc-500">
-              LinkedIn
-            </p>
-
-            <p className="mt-1 text-sm text-zinc-300 transition group-hover:text-white">
-              Muhammad Rido Ramdene
-            </p>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-      {/* Footer */}
-      <footer className="border-t border-white/10">
-        <div className="mx-auto flex max-w-6xl justify-between px-6 py-8 text-sm text-zinc-500">
-          <p>© 2026 Ridho Ramdene.</p>
-          <p>Developer & Designer</p>
-        </div>
-      </footer>
+      </section>
     </main>
   );
 }
