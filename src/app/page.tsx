@@ -205,11 +205,11 @@ export default function Home() {
           <div className="flex gap-5">
             <div className="mt-2 h-1 w-10 shrink-0 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)] md:w-12" />
             <p className="text-sm leading-relaxed text-gray-300 md:text-base">
-              Saya memiliki ketertarikan pada pengembangan teknologi berbasis web dan desain antarmuka.
-              Dalam proses pengembangan sebuah website, saya tidak hanya memperhatikan bagaimana sistem bekerja,
-              tetapi juga bagaimana pengguna berinteraksi dengan sistem tersebut. Saya{" "}
-              <span className="font-medium text-cyan-400">senang mempelajari hal baru</span> dan
-              mengubah ide menjadi produk digital yang fungsional.
+              I&apos;m Muhammad Ridho Ramdene, but you can call me <span className="font-medium text-cyan-400">Genyot</span>. I&apos;m a fresh graduate with a Bachelor&apos;s degree in Information Systems, with a strong interest in web development, UI design, and creative digital work.
+              <br /><br />
+              I enjoy turning ideas into something real, whether it&apos;s a website, a visual design, or a simple video project. I like experimenting with code, exploring new technologies, and using <span className="font-medium text-cyan-400">vibecoding</span> to bring ideas to life in a more creative and flexible way.
+              <br /><br />
+              Besides coding, I also enjoy designing and occasionally editing videos. I&apos;m always curious to learn new things, try different approaches, and improve through every project I work on.
             </p>
           </div>
         </div>
