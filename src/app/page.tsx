@@ -94,6 +94,7 @@ const navLinks = [
   { href: "#portfolio", label: "Portfolio" },
   { href: "#music", label: "Music" },
   { href: "#services", label: "Jasa" },
+  { href: "#sosial", label: "Sosial" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -123,13 +124,11 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Mobile: social icons row */}
-          <div className="flex items-center gap-3 md:hidden text-gray-400">
-            {socials.slice(0, 4).map((s) => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
-                <s.icon size={18} />
-              </a>
-            ))}
+          {/* Mobile: hapus social icons, ganti tombol contact */}
+          <div className="flex items-center md:hidden">
+            <a href="#contact" className="glass-button rounded-lg px-4 py-2 text-xs font-medium text-white">
+              Contact
+            </a>
           </div>
         </div>
 
@@ -173,14 +172,7 @@ export default function Home() {
               </a>
             </div>
 
-            {/* Social icons */}
-            <div className="animate-fade-up animation-delay-300 mt-5 flex flex-wrap gap-2 md:gap-4">
-              {socials.map((s) => (
-                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
-                  <s.icon size={14} className="sm:w-5 sm:h-5" />
-                </a>
-              ))}
-            </div>
+            {/* Social icons — hidden, pindah ke section sendiri */}
           </div>
 
           {/* Foto — kanan, dengan gradasi di belakang */}
@@ -316,6 +308,29 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Social Media Section */}
+      <section id="sosial" className="mx-auto max-w-6xl px-5 pb-20 relative z-10 md:pb-32">
+        <div className="mb-10 animate-fade-up text-center md:mb-14 md:text-left">
+          <h2 className="font-serif text-3xl font-bold md:text-4xl">Social Media</h2>
+          <p className="mt-3 text-sm text-gray-400">Temukan saya di berbagai platform.</p>
+        </div>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+          {socials.map((s, i) => (
+            <a
+              key={s.label}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass-card animate-fade-up group flex flex-col items-center justify-center gap-3 py-8 transition-all"
+              style={{ animationDelay: `${i * 60}ms` }}
+            >
+              <s.icon size={32} className="text-gray-300 transition-transform duration-300 group-hover:scale-110 group-hover:text-cyan-400" />
+              <span className="text-xs font-medium text-gray-400 group-hover:text-white">{s.label}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
       {/* Contact */}
       <section id="contact" className="relative z-10 border-t border-white/10">
         <div className="mx-auto max-w-4xl px-5 py-20 text-center md:py-24">
@@ -341,14 +356,6 @@ export default function Home() {
               </div>
               <span className="text-sm">+62 819-1732-0266</span>
             </a>
-          </div>
-
-          <div className="animate-fade-up animation-delay-300 mt-12 flex flex-wrap justify-center gap-4">
-            {socials.map((s) => (
-              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="glass-social text-gray-400">
-                <s.icon size={20} />
-              </a>
-            ))}
           </div>
 
           <p className="animate-fade-up animation-delay-400 mt-10 font-serif text-sm text-gray-500">&quot;Thanks for Scrolling&quot;</p>
