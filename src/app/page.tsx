@@ -130,17 +130,15 @@ export default function Home() {
           {/* Foto — tampil duluan di mobile */}
           <div className="order-1 md:order-2 animate-fade-up animation-delay-200 w-full flex justify-center md:justify-end">
             <div className="animate-float">
-              <div className="glass-card relative aspect-square w-52 rounded-full p-2 sm:w-64 md:w-full md:max-w-[300px]">
-                <div className="relative h-full w-full overflow-hidden rounded-full">
-                  <Image
-                    src="/images/profile.jpg"
-                    alt="Foto profil"
-                    fill
-                    priority
-                    className="object-cover"
-                    sizes="(max-width: 640px) 208px, (max-width: 768px) 256px, 300px"
-                  />
-                </div>
+              <div className="relative mx-auto h-52 w-52 overflow-hidden rounded-full border border-white/15 shadow-[0_0_40px_rgba(34,211,238,0.15)] sm:h-64 sm:w-64 md:h-[300px] md:w-[300px]">
+                <Image
+                  src="/images/profile.jpg"
+                  alt="Foto profil"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 640px) 208px, (max-width: 768px) 256px, 300px"
+                />
               </div>
             </div>
           </div>
