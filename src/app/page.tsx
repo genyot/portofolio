@@ -1,6 +1,6 @@
 import Image from "next/image";
 import DesignGallery from "@/components/DesignGallery";
-import { Mail, Phone, FileText, MonitorSmartphone, Palette, BookOpen } from "lucide-react";
+import { Mail, Phone, FileText, MonitorSmartphone, Palette, BookOpen, Camera } from "lucide-react";
 import {
   FaInstagram,
   FaGithub,
@@ -13,7 +13,14 @@ import {
   FaPaintBrush,
   FaPenNib,
 } from "react-icons/fa";
-import { SiMysql } from "react-icons/si";
+import {
+  FaPinterest,
+  FaFacebook,
+  FaTelegram,
+  FaThreads,
+  FaTiktok,
+} from "react-icons/fa6";
+import { SiMysql, SiCanva, SiCapcut } from "react-icons/si";
 
 const skills = [
   { name: "Laravel", icon: FaLaravel, highlight: false },
@@ -23,6 +30,21 @@ const skills = [
   { name: "Microsoft Excel", icon: FaFileExcel, highlight: false },
   { name: "Pixellab", icon: FaPaintBrush, highlight: false },
   { name: "CorelDRAW", icon: FaPenNib, highlight: false },
+  { name: "Canva", icon: SiCanva, highlight: false },
+  { name: "CapCut", icon: SiCapcut, highlight: false },
+  { name: "Fotografer", icon: Camera, highlight: false },
+];
+
+const socials = [
+  { href: "https://github.com/genyot", icon: FaGithub, label: "GitHub" },
+  { href: "https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba", icon: FaLinkedin, label: "LinkedIn" },
+  { href: "https://www.instagram.com/g3ny0t", icon: FaInstagram, label: "Instagram" },
+  { href: "https://wa.me/+6281917320266", icon: FaWhatsapp, label: "WhatsApp" },
+  { href: "https://pin.it/4R3TYSukt", icon: FaPinterest, label: "Pinterest" },
+  { href: "https://www.facebook.com/ridho.ramdana.37", icon: FaFacebook, label: "Facebook" },
+  { href: "https://t.me/g3nyot", icon: FaTelegram, label: "Telegram" },
+  { href: "https://www.threads.com/@4p0f4s1s", icon: FaThreads, label: "Threads" },
+  { href: "https://www.tiktok.com/@apofasis", icon: FaTiktok, label: "TikTok" },
 ];
 
 const experiences = [
@@ -101,15 +123,11 @@ export default function Home() {
 
           {/* Mobile: social icons row */}
           <div className="flex items-center gap-3 md:hidden text-gray-400">
-            <a href="https://github.com/genyot" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
-              <FaGithub size={18} />
-            </a>
-            <a href="https://www.instagram.com/g3ny0t" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
-              <FaInstagram size={18} />
-            </a>
-            <a href="https://wa.me/+6281917320266" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
-              <FaWhatsapp size={18} />
-            </a>
+            {socials.slice(0, 4).map((s) => (
+              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+                <s.icon size={18} />
+              </a>
+            ))}
           </div>
         </div>
 
@@ -154,19 +172,12 @@ export default function Home() {
             </div>
 
             {/* Social icons */}
-            <div className="animate-fade-up animation-delay-300 mt-5 flex gap-2 md:gap-4">
-              <a href="https://github.com/genyot" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
-                <FaGithub size={14} className="sm:w-5 sm:h-5" />
-              </a>
-              <a href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
-                <FaLinkedin size={14} className="sm:w-5 sm:h-5" />
-              </a>
-              <a href="https://www.instagram.com/g3ny0t" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
-                <FaInstagram size={14} className="sm:w-5 sm:h-5" />
-              </a>
-              <a href="https://wa.me/+6281917320266" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
-                <FaWhatsapp size={14} className="sm:w-5 sm:h-5" />
-              </a>
+            <div className="animate-fade-up animation-delay-300 mt-5 flex flex-wrap gap-2 md:gap-4">
+              {socials.map((s) => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
+                  <s.icon size={14} className="sm:w-5 sm:h-5" />
+                </a>
+              ))}
             </div>
           </div>
 
@@ -326,11 +337,12 @@ export default function Home() {
             </a>
           </div>
 
-          <div className="animate-fade-up animation-delay-300 mt-12 flex justify-center gap-4">
-            <a href="https://github.com/genyot" className="glass-social text-gray-400"><FaGithub size={20} /></a>
-            <a href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba" className="glass-social text-gray-400"><FaLinkedin size={20} /></a>
-            <a href="https://wa.me/+6281917320266" className="glass-social text-gray-400"><FaWhatsapp size={20} /></a>
-            <a href="https://www.instagram.com/g3ny0t" className="glass-social text-gray-400"><FaInstagram size={20} /></a>
+          <div className="animate-fade-up animation-delay-300 mt-12 flex flex-wrap justify-center gap-4">
+            {socials.map((s) => (
+              <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="glass-social text-gray-400">
+                <s.icon size={20} />
+              </a>
+            ))}
           </div>
 
           <p className="animate-fade-up animation-delay-400 mt-10 font-serif text-sm text-gray-500">&quot;Thanks for Scrolling&quot;</p>
