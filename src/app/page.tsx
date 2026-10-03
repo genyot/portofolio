@@ -66,6 +66,12 @@ const services = [
   },
 ];
 
+const navLinks = [
+  { href: "#about", label: "About" },
+  { href: "#portfolio", label: "Portfolio" },
+  { href: "#contact", label: "Contact" },
+];
+
 export default function Home() {
   return (
     <main className="min-h-screen text-white selection:bg-cyan-500/30 selection:text-white relative">
@@ -77,87 +83,123 @@ export default function Home() {
       </div>
 
       {/* Navbar */}
-      <nav className="glass-navbar sticky top-0 z-50 mx-auto flex w-full items-center justify-between px-6 py-4 transition-all duration-300 md:px-12">
-        <a href="#" className="animate-fade-up font-serif text-3xl font-bold text-white">
-          MR<span className="text-cyan-400">.</span>
-        </a>
+      <nav className="glass-navbar sticky top-0 z-50 w-full px-5 py-4 md:px-12">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
+          <a href="#" className="animate-fade-up font-serif text-2xl font-bold text-white md:text-3xl">
+            MR<span className="text-cyan-400">.</span>
+          </a>
 
-        <div className="animate-fade-up animation-delay-100 hidden gap-8 text-sm font-medium text-gray-300 md:flex">
-          <a href="#about" className="hover:text-cyan-400 transition-colors">
-            About
-          </a>
-          <a href="#portfolio" className="hover:text-cyan-400 transition-colors">
-            Portfolio
-          </a>
-          <a href="#contact" className="hover:text-cyan-400 transition-colors">
-            Contact
-          </a>
+          {/* Desktop Nav */}
+          <div className="animate-fade-up animation-delay-100 hidden gap-8 text-sm font-medium text-gray-300 md:flex">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} className="hover:text-cyan-400 transition-colors">
+                {link.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Mobile: social icons row */}
+          <div className="flex items-center gap-3 md:hidden text-gray-400">
+            <a href="https://github.com/genyot" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+              <FaGithub size={18} />
+            </a>
+            <a href="https://www.instagram.com/g3ny0t" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+              <FaInstagram size={18} />
+            </a>
+            <a href="https://wa.me/+6281917320266" target="_blank" rel="noopener noreferrer" className="hover:text-cyan-400 transition-colors">
+              <FaWhatsapp size={18} />
+            </a>
+          </div>
+        </div>
+
+        {/* Mobile: bottom nav links */}
+        <div className="mt-3 flex justify-center gap-6 text-xs font-medium text-gray-400 md:hidden">
+          {navLinks.map((link) => (
+            <a key={link.href} href={link.href} className="hover:text-cyan-400 transition-colors py-1">
+              {link.label}
+            </a>
+          ))}
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-12 md:grid-cols-2 md:pt-20">
-        <div className="max-w-xl">
-          <h1 className="animate-fade-up font-serif text-5xl font-bold leading-tight md:text-7xl">
-            <span className="text-gray-400 text-3xl md:text-5xl">I&apos;M </span>
-            <br />
-            Muhammad Rido Ramdene
-          </h1>
-          <p className="animate-fade-up animation-delay-100 mt-4 text-lg text-gray-400">
-            S1 Sistem Informasi
-          </p>
-          <a
-            href="#contact"
-            className="glass-button animate-fade-up animation-delay-200 mt-8 inline-block rounded-lg px-8 py-3 text-sm font-medium text-white"
-          >
-            Contact Me
-          </a>
-        </div>
+      <section className="mx-auto max-w-6xl px-5 pt-10 pb-16 md:pt-20 md:pb-0">
+        <div className="flex flex-col items-center gap-8 md:grid md:grid-cols-2 md:items-center md:gap-12">
 
-        <div className="animate-fade-up animation-delay-300 relative mx-auto w-full max-w-md md:ml-auto">
-          <div className="animate-float">
-            <div className="glass-card relative mx-auto aspect-square w-full max-w-[320px] rounded-full p-2">
-              <div className="relative h-full w-full overflow-hidden rounded-full">
-                <Image
-                  src="/images/profile.jpg"
-                  alt="Foto profil"
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 320px"
-                />
+          {/* Foto — tampil duluan di mobile */}
+          <div className="order-1 md:order-2 animate-fade-up animation-delay-200 w-full flex justify-center md:justify-end">
+            <div className="animate-float">
+              <div className="glass-card relative aspect-square w-52 rounded-full p-2 sm:w-64 md:w-full md:max-w-[300px]">
+                <div className="relative h-full w-full overflow-hidden rounded-full">
+                  <Image
+                    src="/images/profile.jpg"
+                    alt="Foto profil"
+                    fill
+                    priority
+                    className="object-cover"
+                    sizes="(max-width: 640px) 208px, (max-width: 768px) 256px, 300px"
+                  />
+                </div>
               </div>
             </div>
           </div>
-          
-          {/* Floating Socials */}
-          <div className="absolute bottom-12 right-0 flex flex-col gap-4 text-gray-300">
-            <a href="https://github.com/genyot" target="_blank" rel="noopener noreferrer" className="glass-social animate-fade-up animation-delay-400">
-              <FaGithub size={20} />
-            </a>
-            <a href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba" target="_blank" rel="noopener noreferrer" className="glass-social animate-fade-up animation-delay-500">
-              <FaLinkedin size={20} />
-            </a>
-            <a href="https://www.instagram.com/g3ny0t" target="_blank" rel="noopener noreferrer" className="glass-social animate-fade-up animation-delay-400">
-              <FaInstagram size={20} />
-            </a>
-            <a href="https://wa.me/+6281917320266" target="_blank" rel="noopener noreferrer" className="glass-social animate-fade-up animation-delay-500">
-              <FaWhatsapp size={20} />
-            </a>
+
+          {/* Teks */}
+          <div className="order-2 md:order-1 text-center md:text-left">
+            <h1 className="animate-fade-up font-serif text-4xl font-bold leading-tight sm:text-5xl md:text-6xl lg:text-7xl">
+              <span className="text-2xl text-gray-400 sm:text-3xl md:text-5xl">I&apos;M </span>
+              <br />
+              Muhammad Rido Ramdene
+            </h1>
+            <p className="animate-fade-up animation-delay-100 mt-3 text-base text-gray-400 sm:text-lg">
+              S1 Sistem Informasi
+            </p>
+            <div className="animate-fade-up animation-delay-200 mt-6 flex flex-wrap items-center justify-center gap-3 md:justify-start">
+              <a
+                href="#contact"
+                className="glass-button rounded-lg px-6 py-3 text-sm font-medium text-white"
+              >
+                Contact Me
+              </a>
+              <a
+                href="#portfolio"
+                className="rounded-lg border border-white/10 px-6 py-3 text-sm font-medium text-gray-300 transition hover:border-cyan-400/40 hover:text-cyan-400"
+              >
+                Lihat Karya
+              </a>
+            </div>
+
+            {/* Social icons — desktop only (floating version dihapus) */}
+            <div className="animate-fade-up animation-delay-300 mt-8 hidden justify-start gap-4 md:flex">
+              <a href="https://github.com/genyot" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
+                <FaGithub size={18} />
+              </a>
+              <a href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
+                <FaLinkedin size={18} />
+              </a>
+              <a href="https://www.instagram.com/g3ny0t" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
+                <FaInstagram size={18} />
+              </a>
+              <a href="https://wa.me/+6281917320266" target="_blank" rel="noopener noreferrer" className="glass-social text-gray-300">
+                <FaWhatsapp size={18} />
+              </a>
+            </div>
           </div>
+
         </div>
       </section>
 
       {/* About */}
-      <section id="about" className="mx-auto max-w-6xl px-6 py-32 relative z-10">
+      <section id="about" className="mx-auto max-w-6xl px-5 py-20 relative z-10 md:py-32">
         <div className="animate-fade-up">
-          <h2 className="mb-8 font-serif text-4xl font-bold">About</h2>
-          <div className="flex gap-6">
-            <div className="mt-2 h-1 w-12 shrink-0 bg-cyan-400 rounded-full shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
-            <p className="max-w-3xl leading-relaxed text-gray-300">
-              Saya memiliki ketertarikan pada pengembangan teknologi berbasis web dan desain antarmuka. 
-              Dalam proses pengembangan sebuah website, saya tidak hanya memperhatikan bagaimana sistem bekerja, 
-              tetapi juga bagaimana pengguna berinteraksi dengan sistem tersebut. Saya <span className="text-cyan-400 font-medium">senang mempelajari hal baru</span> dan 
+          <h2 className="mb-6 font-serif text-3xl font-bold md:text-4xl">About</h2>
+          <div className="flex gap-5">
+            <div className="mt-2 h-1 w-10 shrink-0 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)] md:w-12" />
+            <p className="text-sm leading-relaxed text-gray-300 md:text-base">
+              Saya memiliki ketertarikan pada pengembangan teknologi berbasis web dan desain antarmuka.
+              Dalam proses pengembangan sebuah website, saya tidak hanya memperhatikan bagaimana sistem bekerja,
+              tetapi juga bagaimana pengguna berinteraksi dengan sistem tersebut. Saya{" "}
+              <span className="font-medium text-cyan-400">senang mempelajari hal baru</span> dan
               mengubah ide menjadi produk digital yang fungsional.
             </p>
           </div>
@@ -165,21 +207,21 @@ export default function Home() {
       </section>
 
       {/* Skills */}
-      <section className="mx-auto max-w-6xl px-6 pb-32 relative z-10">
-        <h2 className="animate-fade-up mb-12 text-center font-serif text-4xl font-bold md:text-left">My Skills</h2>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:gap-6">
+      <section className="mx-auto max-w-6xl px-5 pb-20 relative z-10 md:pb-32">
+        <h2 className="animate-fade-up mb-8 text-center font-serif text-3xl font-bold md:mb-12 md:text-left md:text-4xl">My Skills</h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-6">
           {skills.map((skill, i) => {
             const Icon = skill.icon;
             return (
               <div
                 key={skill.name}
-                className={`glass-card group flex aspect-square animate-fade-up flex-col items-center justify-center gap-4 ${
+                className={`glass-card group flex aspect-square animate-fade-up flex-col items-center justify-center gap-3 md:gap-4 ${
                   skill.highlight ? "ring-1 ring-cyan-400/50 bg-cyan-900/10" : ""
                 }`}
-                style={{ animationDelay: `${(i % 4) * 100}ms` }}
+                style={{ animationDelay: `${(i % 4) * 80}ms` }}
               >
-                <Icon size={48} className={`transition-transform duration-500 group-hover:scale-110 ${skill.highlight ? "text-cyan-400" : "text-gray-300"}`} />
-                <span className="text-sm font-medium text-gray-200">{skill.name}</span>
+                <Icon size={36} className={`transition-transform duration-500 group-hover:scale-110 md:text-5xl ${skill.highlight ? "text-cyan-400" : "text-gray-300"}`} />
+                <span className="text-center text-xs font-medium leading-tight text-gray-200 px-1 md:text-sm">{skill.name}</span>
               </div>
             );
           })}
@@ -187,9 +229,9 @@ export default function Home() {
       </section>
 
       {/* Portfolio Header */}
-      <div id="portfolio" className="pt-20 text-center animate-fade-up relative z-10">
-        <h2 className="font-serif text-4xl font-bold">Portfolio</h2>
-        <div className="mt-4 flex justify-center gap-2 text-cyan-400">
+      <div id="portfolio" className="pb-4 pt-16 text-center animate-fade-up relative z-10 md:pt-20">
+        <h2 className="font-serif text-3xl font-bold md:text-4xl">Portfolio</h2>
+        <div className="mt-3 flex justify-center gap-2 text-cyan-400">
           <span className="h-2 w-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)]" />
           <span className="h-2 w-2 rounded-full bg-cyan-400/50" />
           <span className="h-2 w-2 rounded-full bg-cyan-400/30" />
@@ -201,47 +243,50 @@ export default function Home() {
         <DesignGallery />
       </div>
 
-      {/* Experience / Projects Timeline */}
-      <section className="mx-auto max-w-4xl px-6 py-32 relative z-10">
-        <h2 className="animate-fade-up mb-16 font-serif text-4xl font-bold">Experience</h2>
-        <div className="space-y-12 border-l border-white/10 pl-8">
+      {/* Experience Timeline */}
+      <section className="mx-auto max-w-4xl px-5 py-20 relative z-10 md:py-32">
+        <h2 className="animate-fade-up mb-10 font-serif text-3xl font-bold md:mb-16 md:text-4xl">Experience</h2>
+        <div className="space-y-6 md:space-y-10">
           {experiences.map((exp, i) => (
-            <div key={i} className="glass-card animate-fade-up relative p-6" style={{ animationDelay: `${(i + 1) * 100}ms` }}>
-              {/* Timeline Dot */}
-              <div className="absolute -left-[41px] top-6 h-4 w-4 rounded-full border-4 border-[#05050a] bg-cyan-400 shadow-[0_0_15px_rgba(34,211,238,0.8)]" />
-              
-              <div className="absolute -left-[120px] top-5 hidden md:block">
-                <span className="glass-button rounded-full px-4 py-2 text-xs font-medium text-gray-200">
-                  Experience
-                </span>
-              </div>
+            <div
+              key={i}
+              className="glass-card animate-fade-up relative p-5 md:p-6"
+              style={{ animationDelay: `${(i + 1) * 100}ms` }}
+            >
+              {/* Colored left border accent */}
+              <div className="absolute left-0 top-0 h-full w-1 rounded-l-xl bg-gradient-to-b from-cyan-400/60 to-transparent" />
 
-              <h3 className="text-xl font-bold text-white transition-colors">{exp.title}</h3>
+              <div className="mb-1 inline-block rounded-full bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-400">
+                Experience
+              </div>
+              <h3 className="mt-2 text-lg font-bold text-white md:text-xl">{exp.title}</h3>
               <p className="mt-1 text-sm text-cyan-400">{exp.company}</p>
-              <p className="mt-4 text-sm leading-relaxed text-gray-300">
-                {exp.description}
-              </p>
+              <p className="mt-3 text-sm leading-relaxed text-gray-300">{exp.description}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Services / Open Jasa */}
-      <section className="mx-auto max-w-6xl px-6 pb-32 relative z-10">
-        <div className="text-center md:text-left mb-16 animate-fade-up">
-          <h2 className="font-serif text-4xl font-bold">Layanan Jasa</h2>
-          <p className="mt-4 text-gray-400">Open jasa untuk berbagai kebutuhan tugas dan desain.</p>
+      {/* Services */}
+      <section className="mx-auto max-w-6xl px-5 pb-20 relative z-10 md:pb-32">
+        <div className="mb-10 animate-fade-up text-center md:mb-16 md:text-left">
+          <h2 className="font-serif text-3xl font-bold md:text-4xl">Layanan Jasa</h2>
+          <p className="mt-3 text-sm text-gray-400 md:text-base">Open jasa untuk berbagai kebutuhan tugas dan desain.</p>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
           {services.map((svc, i) => {
             const Icon = svc.icon;
             return (
-              <div key={i} className="glass-card animate-fade-up group relative p-8" style={{ animationDelay: `${(i % 4) * 100}ms` }}>
-                <div className="mb-6 inline-flex rounded-xl bg-cyan-400/10 p-4 text-cyan-400 transition-transform duration-500 group-hover:scale-110 group-hover:bg-cyan-400/20 shadow-[0_0_20px_rgba(34,211,238,0.1)]">
-                  <Icon size={32} />
+              <div
+                key={i}
+                className="glass-card animate-fade-up group relative p-6 md:p-8"
+                style={{ animationDelay: `${(i % 4) * 100}ms` }}
+              >
+                <div className="mb-4 inline-flex rounded-xl bg-cyan-400/10 p-3 text-cyan-400 transition-transform duration-500 group-hover:scale-110 group-hover:bg-cyan-400/20 shadow-[0_0_20px_rgba(34,211,238,0.1)] md:mb-6 md:p-4">
+                  <Icon size={28} className="md:w-8 md:h-8" />
                 </div>
-                <h3 className="mb-3 font-serif text-2xl font-bold text-white">{svc.title}</h3>
-                <p className="leading-relaxed text-gray-400 group-hover:text-gray-300 transition-colors">
+                <h3 className="mb-2 font-serif text-xl font-bold text-white md:mb-3 md:text-2xl">{svc.title}</h3>
+                <p className="text-sm leading-relaxed text-gray-400 transition-colors group-hover:text-gray-300">
                   {svc.description}
                 </p>
               </div>
@@ -252,32 +297,39 @@ export default function Home() {
 
       {/* Contact */}
       <section id="contact" className="relative z-10 border-t border-white/10">
-        <div className="mx-auto max-w-4xl px-6 py-24 text-center">
-          <h2 className="animate-fade-up mb-12 font-serif text-4xl font-bold">Contact Me</h2>
-          
-          <div className="flex flex-col items-center justify-center gap-6 md:flex-row md:gap-12">
-            <a href="mailto:ridhoramdana985@gmail.com" className="animate-fade-up animation-delay-100 flex items-center gap-3 text-gray-300">
-              <div className="glass-social">
-                <Mail size={20} />
+        <div className="mx-auto max-w-4xl px-5 py-20 text-center md:py-24">
+          <h2 className="animate-fade-up mb-10 font-serif text-3xl font-bold md:mb-12 md:text-4xl">Contact Me</h2>
+
+          <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-6 md:gap-12">
+            <a
+              href="mailto:ridhoramdana985@gmail.com"
+              className="animate-fade-up animation-delay-100 glass-card flex items-center gap-4 p-4 text-gray-300 transition-colors hover:text-white sm:w-auto"
+            >
+              <div className="glass-social shrink-0">
+                <Mail size={18} />
               </div>
-              <span className="text-sm transition-colors hover:text-white">ridhoramdana985@gmail.com</span>
+              <span className="text-sm">ridhoramdana985@gmail.com</span>
             </a>
-            
-            <a href="https://wa.me/+6281917320266" className="animate-fade-up animation-delay-200 flex items-center gap-3 text-gray-300">
-              <div className="glass-social">
-                <Phone size={20} />
+
+            <a
+              href="https://wa.me/+6281917320266"
+              className="animate-fade-up animation-delay-200 glass-card flex items-center gap-4 p-4 text-gray-300 transition-colors hover:text-white sm:w-auto"
+            >
+              <div className="glass-social shrink-0">
+                <Phone size={18} />
               </div>
-              <span className="text-sm transition-colors hover:text-white">+62 819-1732-0266</span>
+              <span className="text-sm">+62 819-1732-0266</span>
             </a>
           </div>
 
-          <div className="animate-fade-up animation-delay-300 mt-16 flex justify-center gap-6 text-gray-400">
-            <a href="https://github.com/genyot" className="glass-social"><FaGithub size={20} /></a>
-            <a href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba" className="glass-social"><FaLinkedin size={20} /></a>
-            <a href="https://wa.me/+6281917320266" className="glass-social"><FaWhatsapp size={20} /></a>
+          <div className="animate-fade-up animation-delay-300 mt-12 flex justify-center gap-4">
+            <a href="https://github.com/genyot" className="glass-social text-gray-400"><FaGithub size={20} /></a>
+            <a href="https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba" className="glass-social text-gray-400"><FaLinkedin size={20} /></a>
+            <a href="https://wa.me/+6281917320266" className="glass-social text-gray-400"><FaWhatsapp size={20} /></a>
+            <a href="https://www.instagram.com/g3ny0t" className="glass-social text-gray-400"><FaInstagram size={20} /></a>
           </div>
-          
-          <p className="animate-fade-up animation-delay-400 mt-12 font-serif text-gray-400/80">&quot;Thanks for Scrolling&quot;</p>
+
+          <p className="animate-fade-up animation-delay-400 mt-10 font-serif text-sm text-gray-500">&quot;Thanks for Scrolling&quot;</p>
         </div>
       </section>
     </main>
