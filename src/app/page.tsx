@@ -27,7 +27,7 @@ const skills = [
 
 const experiences = [
   {
-    title: "Creator Digi",
+    title: "Creator Digital",
     company: "Pondok Pesantren Daarul Jalal",
     description: "Bertanggung jawab dalam pengelolaan konten digital, desain grafis, dan publikasi media sosial untuk kebutuhan pondok pesantren.",
   },
@@ -44,7 +44,7 @@ export default function Home() {
       {/* Navbar */}
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-8">
         <a href="#" className="font-serif text-3xl font-bold text-yellow-400">
-          R<span className="text-white">.</span>
+          MR<span className="text-white">.</span>
         </a>
 
         <div className="hidden gap-8 text-sm font-medium text-gray-300 md:flex">
@@ -66,10 +66,10 @@ export default function Home() {
           <h1 className="font-serif text-5xl font-bold leading-tight md:text-7xl">
             <span className="text-gray-400 text-3xl md:text-5xl">I&apos;M </span>
             <br />
-            Muhammad Rido
+            Muhammad Rido Ramdene
           </h1>
           <p className="mt-4 text-lg text-gray-400">
-            Creator Digi & Operator Pesantren
+            Creator Digital & Operator Pesantren
           </p>
           <a
             href="#contact"
