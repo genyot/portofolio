@@ -69,6 +69,7 @@ const services = [
 const navLinks = [
   { href: "#about", label: "About" },
   { href: "#portfolio", label: "Portfolio" },
+  { href: "#services", label: "Jasa" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -268,7 +269,7 @@ export default function Home() {
       </section>
 
       {/* Services */}
-      <section className="mx-auto max-w-6xl px-5 pb-20 relative z-10 md:pb-32">
+      <section id="services" className="mx-auto max-w-6xl px-5 pb-20 relative z-10 md:pb-32">
         <div className="mb-10 animate-fade-up text-center md:mb-16 md:text-left">
           <h2 className="font-serif text-3xl font-bold md:text-4xl">Layanan Jasa</h2>
           <p className="mt-3 text-sm text-gray-400 md:text-base">Open jasa untuk berbagai kebutuhan tugas dan desain.</p>
