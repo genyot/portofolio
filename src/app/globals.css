@@ -23,6 +23,20 @@ body {
   overflow-x: hidden;
 }
 
+/* Photo Background (Layer 1) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url('/images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.12;
+  filter: blur(2px);
+  pointer-events: none;
+  z-index: -3;
+}
+
 /* 
   ========================================
   LIQUID BACKGROUND BLOBS
