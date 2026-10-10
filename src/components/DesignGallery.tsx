@@ -21,6 +21,7 @@ export default async function DesignGallery() {
                 src={design.image}
                 alt={design.title}
                 fill
+                unoptimized
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 className="object-cover"
               />
