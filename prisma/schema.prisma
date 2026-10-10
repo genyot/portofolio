@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+  read      Boolean  @default(false)
+}
+
+model Experience {
+  id          String   @id @default(cuid())
+  title       String
+  company     String
+  description String
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Portfolio {
+  id        String   @id @default(cuid())
+  title     String
+  category  String
+  image     String
+  aspect    String   @default("aspect-square")
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  icon        String   @default("BookOpen")
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+}
+
+model Skill {
+  id        String   @id @default(cuid())
+  name      String
+  icon      String   @default("Palette")
+  highlight Boolean  @default(false)
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Playlist {
+  id       String @id @default(cuid())
+  spotifyId String
+  title    String
+  subtitle String
+  color    String @default("from-yellow-500/20 to-green-600/10")
+  glow     String @default("rgba(234,179,8,0.3)")
+  order    Int    @default(0)
+}
+
+model SocialLink {
+  id    String @id @default(cuid())
+  href  String
+  label String
+  icon  String
+  order Int    @default(0)
+}
+
+model SiteProfile {
+  id          String @id @default("main")
+  name        String @default("Muhammad Rido Ramdene")
+  title       String @default("S1 Sistem Informasi")
+  bio         String @default("")
+  photo       String @default("/images/profile.jpg")
+  email       String @default("ridhoramdana985@gmail.com")
+  phone       String @default("+62 819-1732-0266")
+  whatsappUrl String @default("https://wa.me/+6281917320266")
+}

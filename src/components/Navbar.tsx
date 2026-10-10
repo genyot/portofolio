@@ -4,13 +4,14 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
 export const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#portfolio", label: "Portfolio" },
-  { href: "#music", label: "Music" },
-  { href: "#experience", label: "Experience" },
-  { href: "#services", label: "Jasa" },
-  { href: "#sosial", label: "Sosial" },
-  { href: "#contact", label: "Contact" },
+  { href: "/", label: "Beranda" },
+  { href: "/portfolio", label: "Karya" },
+  { href: "/experience", label: "Experience" },
+  { href: "/services", label: "Jasa" },
+  { href: "/skills", label: "Skills" },
+  { href: "/music", label: "Music" },
+  { href: "/social", label: "Social" },
+  { href: "/contact", label: "Contact" },
 ];
 
 export default function Navbar() {
@@ -20,22 +21,23 @@ export default function Navbar() {
     <>
       <nav className="glass-navbar sticky top-0 z-50 w-full px-5 py-4 md:px-12">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <a href="#" className="animate-fade-up font-serif text-2xl font-bold text-white md:text-3xl">
+          <a href="/" className="animate-fade-up font-serif text-2xl font-bold text-white md:text-3xl">
             MR<span className="text-cyan-400">.</span>
           </a>
 
           {/* Desktop Nav */}
-          <div className="animate-fade-up animation-delay-100 hidden gap-8 text-sm font-medium text-gray-300 md:flex">
+          <div className="animate-fade-up animation-delay-100 hidden items-center gap-8 text-sm font-medium text-gray-300 md:flex">
             {navLinks.map((link) => (
               <a key={link.href} href={link.href} className="hover:text-cyan-400 transition-colors">
                 {link.label}
               </a>
             ))}
+            <a href="/login" className="glass-button rounded-lg px-4 py-2 text-white transition-colors hover:text-cyan-400">Login Admin</a>
           </div>
 
           {/* Mobile: Hamburger & Contact */}
           <div className="flex items-center gap-3 md:hidden">
-            <a href="#contact" className="glass-button rounded-lg px-4 py-2 text-xs font-medium text-white">
+            <a href="/contact" className="glass-button rounded-lg px-4 py-2 text-xs font-medium text-white">
               Contact
             </a>
             <button 
@@ -83,6 +85,7 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+            <a href="/login" onClick={() => setIsOpen(false)} className="glass-button mt-2 rounded-lg px-4 py-3 text-center font-medium text-white transition-colors hover:text-cyan-400">Login Admin</a>
           </div>
         </div>
       </div>

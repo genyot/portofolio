@@ -1,7 +1,10 @@
+import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 import DesignGallery from "@/components/DesignGallery";
 import MusicPlayer from "@/components/MusicPlayer";
 import Navbar from "@/components/Navbar";
+import ContactForm from "@/components/ContactForm";
+import ProfilePhoto from "@/components/ProfilePhoto";
 import { Mail, Phone, FileText, MonitorSmartphone, Palette, BookOpen, Camera, Scissors, Video, SlidersHorizontal, Aperture } from "lucide-react";
 import {
   FaInstagram,
@@ -24,7 +27,7 @@ import {
 } from "react-icons/fa6";
 import { SiMysql } from "react-icons/si";
 
-const skills = [
+const defaultSkills = [
   { name: "Laravel", icon: FaLaravel, highlight: false },
   { name: "PHP", icon: FaPhp, highlight: false },
   { name: "MySQL", icon: SiMysql, highlight: false },
@@ -51,30 +54,8 @@ const socials = [
   { href: "https://www.tiktok.com/@apofasis", icon: FaTiktok, label: "TikTok" },
 ];
 
-const experiences = [
-  {
-    title: "Creator Digital",
-    company: "Pondok Pesantren Daarul Jalal",
-    description: "Bertanggung jawab dalam pengelolaan konten digital, desain grafis, dan publikasi media sosial untuk kebutuhan pondok pesantren.",
-  },
-  {
-    title: "Operator",
-    company: "Pondok Pesantren Daarul Jalal",
-    description: "Menangani urusan administrasi, pengelolaan data santri, dan operasional teknis harian di lingkungan pondok pesantren.",
-  },
-  {
-    title: "Manajemen Pendakian Gunung",
-    company: "Freelance",
-    description: "Berpengalaman dalam mengorganisir, merencanakan, dan mengelola kegiatan pendakian gunung, mencakup penyediaan logistik, pemetaan rute, dan manajemen keselamatan tim.",
-  },
-  {
-    title: "Jasa Desain & Joki Tugas",
-    company: "Freelance",
-    description: "Menerima jasa desain grafis (spanduk, poster, undangan digital) serta membantu penyelesaian tugas akademik (joki tugas kuliah, makalah, skripsi).",
-  },
-];
 
-const services = [
+const defaultServices = [
   {
     title: "Tugas Kuliah & Skripsi",
     description: "Jasa pembuatan skripsi, makalah, jurnal, presentasi, dan tugas akademik lainnya secara terstruktur dan rapi.",
@@ -97,7 +78,20 @@ const services = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const [dbExperiences, dbSkills, dbServices, profile, playlists] = await Promise.all([
+    prisma.experience.findMany({ orderBy: { order: 'asc' } }),
+    prisma.skill.findMany({ orderBy: { order: 'asc' } }),
+    prisma.service.findMany({ orderBy: { order: 'asc' } }),
+    prisma.siteProfile.findUnique({ where: { id: 'main' } }),
+    prisma.playlist.findMany({ orderBy: { order: 'asc' } }),
+  ]);
+  const experiencesToDisplay = dbExperiences;
+  const skillsToDisplay = dbSkills.length > 0 ? dbSkills : defaultSkills;
+  const servicesToDisplay = dbServices.length > 0 ? dbServices : defaultServices;
+  const skillIcons: Record<string, typeof FaLaravel> = { Laravel: FaLaravel, PHP: FaPhp, MySQL: SiMysql, 'Microsoft Word': FaFileWord, 'Microsoft Excel': FaFileExcel, Pixellab: FaPaintBrush, CorelDRAW: FaPenNib, Canva: Palette, CapCut: Scissors, Fotografer: Camera, 'Adobe Lightroom': Aperture, Snapseed: SlidersHorizontal };
+  const serviceIcons: Record<string, typeof BookOpen> = { BookOpen, MonitorSmartphone, FileText, Palette, Camera, Scissors, Video, SlidersHorizontal, Aperture };
+
   return (
     <main className="min-h-screen text-white selection:bg-cyan-500/30 selection:text-white relative">
       {/* Liquid Blobs Background */}
@@ -119,10 +113,10 @@ export default function Home() {
             <h1 className="font-serif text-2xl font-bold leading-tight sm:text-4xl md:text-6xl lg:text-7xl">
               <span className="text-base text-gray-400 sm:text-2xl md:text-5xl">I&apos;M </span>
               <br />
-              Muhammad Rido Ramdene
+              {profile?.name ?? 'Muhammad Rido Ramdene'}
             </h1>
             <p className="animate-fade-up animation-delay-100 mt-2 text-xs text-gray-400 sm:text-base md:mt-3 md:text-lg">
-              S1 Sistem Informasi
+              {profile?.title ?? 'S1 Sistem Informasi'}
             </p>
             <div className="animate-fade-up animation-delay-200 mt-4 flex flex-wrap gap-2 md:mt-6 md:gap-3">
               <a
@@ -149,16 +143,7 @@ export default function Home() {
               <div className="absolute inset-0 -z-10 scale-110 rounded-full bg-gradient-to-br from-cyan-500/40 via-violet-500/30 to-pink-500/20 blur-2xl" />
               <div className="absolute inset-0 -z-10 scale-95 rounded-full bg-gradient-to-tr from-indigo-600/30 to-cyan-400/20 blur-xl" />
 
-              <div className="relative h-36 w-36 overflow-hidden rounded-full border border-white/20 shadow-[0_0_30px_rgba(34,211,238,0.2)] sm:h-52 sm:w-52 md:h-[300px] md:w-[300px]">
-                <Image
-                  src="/images/profile.jpg"
-                  alt="Foto profil"
-                  fill
-                  priority
-                  className="object-cover"
-                  sizes="(max-width: 640px) 144px, (max-width: 768px) 208px, 300px"
-                />
-              </div>
+              <ProfilePhoto src={profile?.photo ?? "/images/profile.jpg"} />
             </div>
           </div>
 
@@ -172,11 +157,7 @@ export default function Home() {
           <div className="flex gap-5">
             <div className="mt-2 h-1 w-10 shrink-0 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.5)] md:w-12" />
             <p className="text-sm leading-relaxed text-gray-300 md:text-base">
-              I&apos;m Muhammad Ridho Ramdene, but you can call me <span className="font-medium text-cyan-400">Genyot</span>. I&apos;m a fresh graduate with a Bachelor&apos;s degree in Information Systems, with a strong interest in web development, UI design, and creative digital work.
-              <br /><br />
-              I enjoy turning ideas into something real, whether it&apos;s a website, a visual design, or a simple video project. I like experimenting with code, exploring new technologies, and using <span className="font-medium text-cyan-400">vibecoding</span> to bring ideas to life in a more creative and flexible way.
-              <br /><br />
-              Besides coding, I also enjoy designing and occasionally editing videos. I&apos;m always curious to learn new things, try different approaches, and improve through every project I work on.
+              {profile?.bio || <>I&apos;m Muhammad Ridho Ramdene, but you can call me <span className="font-medium text-cyan-400">Genyot</span>. I&apos;m a fresh graduate with a Bachelor&apos;s degree in Information Systems, with a strong interest in web development, UI design, and creative digital work.<br /><br />I enjoy turning ideas into something real, whether it&apos;s a website, a visual design, or a simple video project. I like experimenting with code, exploring new technologies, and using <span className="font-medium text-cyan-400">vibecoding</span> to bring ideas to life in a more creative and flexible way.<br /><br />Besides coding, I also enjoy designing and occasionally editing videos. I&apos;m always curious to learn new things, try different approaches, and improve through every project I work on.</>}
             </p>
           </div>
         </div>
@@ -186,8 +167,8 @@ export default function Home() {
       <section className="mx-auto max-w-6xl px-5 pb-20 relative z-10 md:pb-32">
         <h2 className="animate-fade-up mb-8 text-center font-serif text-3xl font-bold md:mb-12 md:text-left md:text-4xl">My Skills</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-6">
-          {skills.map((skill, i) => {
-            const Icon = skill.icon;
+          {skillsToDisplay.map((skill, i) => {
+            const Icon = skillIcons[skill.name] ?? (typeof skill.icon === 'string' ? serviceIcons[skill.icon] : skill.icon) ?? Palette;
             return (
               <div
                 key={skill.name}
@@ -220,16 +201,16 @@ export default function Home() {
       </div>
 
       <div id="music">
-        <MusicPlayer />
+        <MusicPlayer playlists={playlists} />
       </div>
 
       {/* Experience Timeline */}
-      <section id="experience" className="mx-auto max-w-4xl px-5 py-20 relative z-10 md:py-32">
+      <section id="experience" className="mx-auto max-w-6xl px-5 py-20 text-left relative z-10 md:py-32">
         <h2 className="animate-fade-up mb-10 font-serif text-3xl font-bold md:mb-16 md:text-4xl">Experience</h2>
         <div className="space-y-6 md:space-y-10">
-          {experiences.map((exp, i) => (
+          {experiencesToDisplay.map((exp: any, i) => (
             <div
-              key={i}
+              key={exp.id || i}
               className="glass-card animate-fade-up relative p-5 md:p-6"
               style={{ animationDelay: `${(i + 1) * 100}ms` }}
             >
@@ -254,8 +235,8 @@ export default function Home() {
           <p className="mt-3 text-sm text-gray-400 md:text-base">Open jasa untuk berbagai kebutuhan tugas dan desain.</p>
         </div>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-6">
-          {services.map((svc, i) => {
-            const Icon = svc.icon;
+          {servicesToDisplay.map((svc, i) => {
+            const Icon = typeof svc.icon === 'string' ? serviceIcons[svc.icon] ?? BookOpen : svc.icon;
             return (
               <div
                 key={i}
@@ -305,27 +286,30 @@ export default function Home() {
 
           <div className="flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center sm:gap-6 md:gap-12">
             <a
-              href="mailto:ridhoramdana985@gmail.com"
+              href={`mailto:${profile?.email ?? 'ridhoramdana985@gmail.com'}`}
               className="animate-fade-up animation-delay-100 glass-card flex items-center gap-4 p-4 text-gray-300 transition-colors hover:text-white sm:w-auto"
             >
               <div className="glass-social shrink-0">
                 <Mail size={18} />
               </div>
-              <span className="text-sm">ridhoramdana985@gmail.com</span>
+              <span className="text-sm">{profile?.email ?? 'ridhoramdana985@gmail.com'}</span>
             </a>
 
             <a
-              href="https://wa.me/+6281917320266"
+              href={profile?.whatsappUrl ?? 'https://wa.me/+6281917320266'}
               className="animate-fade-up animation-delay-200 glass-card flex items-center gap-4 p-4 text-gray-300 transition-colors hover:text-white sm:w-auto"
             >
               <div className="glass-social shrink-0">
                 <Phone size={18} />
               </div>
-              <span className="text-sm">+62 819-1732-0266</span>
+              <span className="text-sm">{profile?.phone ?? '+62 819-1732-0266'}</span>
             </a>
           </div>
 
-          <p className="animate-fade-up animation-delay-400 mt-10 font-serif text-sm text-gray-500">&quot;Thanks for Scrolling&quot;</p>
+          {/* Contact Form CRUD */}
+          <ContactForm />
+
+          <p className="animate-fade-up animation-delay-400 mt-16 font-serif text-sm text-gray-500">&quot;Thanks for Scrolling&quot;</p>
         </div>
       </section>
     </main>

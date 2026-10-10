@@ -1,45 +1,9 @@
+import { prisma } from "@/lib/prisma";
 import Image from "next/image";
 
-const designs = [
-  {
-    title: "Typography 01",
-    category: "Typography",
-    image: "/images/typography/typography%2001.jpeg",
-    aspect: "aspect-[4/5]",
-  },
-  {
-    title: "Typography 02",
-    category: "Typography",
-    image: "/images/typography/typography%2002.jpeg",
-    aspect: "aspect-[3/4]",
-  },
-  {
-    title: "Typography 03",
-    category: "Typography",
-    image: "/images/typography/typography%2003.jpeg",
-    aspect: "aspect-square",
-  },
-  {
-    title: "Typography 04",
-    category: "Typography",
-    image: "/images/typography/typography%2004.jpeg",
-    aspect: "aspect-[4/5]",
-  },
-  {
-    title: "Typography 05",
-    category: "Typography",
-    image: "/images/typography/typography%2005.jpeg",
-    aspect: "aspect-[3/4]",
-  },
-  {
-    title: "Typography 06",
-    category: "Typography",
-    image: "/images/typography/typography%2006.jpeg",
-    aspect: "aspect-[4/5]",
-  },
-];
+export default async function DesignGallery() {
+  const designs = await prisma.portfolio.findMany({ orderBy: { order: 'asc' } });
 
-export default function DesignGallery() {
   return (
     <section className="mx-auto max-w-6xl px-6 py-12">
       {/* Masonry Gallery */}
