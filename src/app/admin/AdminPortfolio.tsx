@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import AdminDeleteDialog from '@/components/AdminDeleteDialog';
 import { addPortfolio, deletePortfolio, updatePortfolio } from '@/app/actions/portfolio';
 
 type Item = { id: string; title: string; category: string; image: string; aspect: string; order: number };
@@ -12,6 +13,8 @@ export default function AdminPortfolio({ initialData }: { initialData: Item[] })
   const [detail, setDetail] = useState<Item | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState<Item | null>(null);
+  const [deletePending, setDeletePending] = useState(false);
 
   async function save(formData: FormData) {
     setLoading(true); setError('');
@@ -21,10 +24,15 @@ export default function AdminPortfolio({ initialData }: { initialData: Item[] })
     setLoading(false);
   }
 
-  async function remove(id: string) {
-    if (!confirm('Yakin ingin menghapus karya ini?')) return;
-    const result = await deletePortfolio(id);
-    if (result?.error) setError(result.error);
+  async function remove() {
+    if (!deleting) return;
+    setDeletePending(true);
+    try {
+      const result = await deletePortfolio(deleting.id);
+      if (result?.error) setError(result.error);
+      else setDeleting(null);
+    } catch { setError('Gagal menghapus karya.'); }
+    setDeletePending(false);
   }
 
   return <div className="grid gap-8 xl:grid-cols-[minmax(260px,0.8fr)_1.2fr]">
@@ -43,10 +51,11 @@ export default function AdminPortfolio({ initialData }: { initialData: Item[] })
     </form>
     <div className="overflow-x-auto rounded-xl border border-white/10">
       <table className="w-full min-w-[620px] text-left text-sm"><thead className="bg-white/5 text-xs uppercase text-gray-400"><tr><th className="p-4">Karya</th><th className="p-4">Kategori</th><th className="p-4">Urutan</th><th className="p-4">Aksi</th></tr></thead><tbody>
-        {initialData.map(item => <tr key={item.id} className="border-t border-white/10"><td className="p-4"><div className="flex items-center gap-3"><div className="relative h-12 w-12 overflow-hidden rounded-lg"><Image src={item.image} alt={item.title} fill unoptimized className="object-cover" /></div><span className="font-medium">{item.title}</span></div></td><td className="p-4 text-gray-400">{item.category}</td><td className="p-4 text-gray-400">{item.order}</td><td className="p-4"><div className="flex gap-3"><button onClick={() => setDetail(item)} className="text-cyan-300">Detail</button><button onClick={() => { setEditing(item); setError(''); }} className="text-gray-200">Edit</button><button onClick={() => remove(item.id)} className="text-red-400">Hapus</button></div></td></tr>)}
+        {initialData.map(item => <tr key={item.id} className="border-t border-white/10"><td className="p-4"><div className="flex items-center gap-3"><div className="relative h-12 w-12 overflow-hidden rounded-lg"><Image src={item.image} alt={item.title} fill unoptimized className="object-cover" /></div><span className="font-medium">{item.title}</span></div></td><td className="p-4 text-gray-400">{item.category}</td><td className="p-4 text-gray-400">{item.order}</td><td className="p-4"><div className="flex gap-3"><button onClick={() => setDetail(item)} className="text-cyan-300">Detail</button><button onClick={() => { setEditing(item); setError(''); }} className="text-gray-200">Edit</button><button onClick={() => setDeleting(item)} className="text-red-400">Hapus</button></div></td></tr>)}
       </tbody></table>
       {initialData.length === 0 && <p className="p-6 text-gray-500">Belum ada karya.</p>}
     </div>
+    <AdminDeleteDialog item={deleting?.title ?? null} pending={deletePending} onCancel={() => setDeleting(null)} onConfirm={remove} />
     {detail && <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-5" role="dialog" aria-modal="true" aria-label="Detail karya" onClick={() => setDetail(null)}><div className="glass-card w-full max-w-xl p-5" onClick={event => event.stopPropagation()}><div className="relative mb-4 aspect-video overflow-hidden rounded-lg"><Image src={detail.image} alt={detail.title} fill unoptimized className="object-contain" /></div><h3 className="text-xl font-bold">{detail.title}</h3><p className="mt-2 text-sm text-gray-400">{detail.category} · {detail.aspect} · Urutan {detail.order}</p><button onClick={() => setDetail(null)} className="glass-button mt-5 rounded-lg px-4 py-2">Tutup</button></div></div>}
   </div>;
 }

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import AdminDeleteDialog from '@/components/AdminDeleteDialog';
 import { addExperience, deleteExperience, updateExperience } from '@/app/actions/experience';
 
 type Item = { id: string; title: string; company: string; description: string; order: number };
@@ -11,6 +12,8 @@ export default function AdminExperience({ initialData }: { initialData: Item[] }
   const [detail, setDetail] = useState<Item | null>(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [deleting, setDeleting] = useState<Item | null>(null);
+  const [deletePending, setDeletePending] = useState(false);
 
   async function save(formData: FormData) {
     setLoading(true); setError('');
@@ -20,10 +23,15 @@ export default function AdminExperience({ initialData }: { initialData: Item[] }
     setLoading(false);
   }
 
-  async function remove(id: string) {
-    if (!confirm('Yakin ingin menghapus pengalaman ini?')) return;
-    const result = await deleteExperience(id);
-    if (result?.error) setError(result.error);
+  async function remove() {
+    if (!deleting) return;
+    setDeletePending(true);
+    try {
+      const result = await deleteExperience(deleting.id);
+      if (result?.error) setError(result.error);
+      else setDeleting(null);
+    } catch { setError('Gagal menghapus pengalaman.'); }
+    setDeletePending(false);
   }
 
   return <div className="grid gap-8 xl:grid-cols-[minmax(260px,0.8fr)_1.2fr]">
@@ -39,10 +47,11 @@ export default function AdminExperience({ initialData }: { initialData: Item[] }
     </form>
     <div className="overflow-x-auto rounded-xl border border-white/10">
       <table className="w-full min-w-[650px] text-left text-sm"><thead className="bg-white/5 text-xs uppercase text-gray-400"><tr><th className="p-4">Posisi</th><th className="p-4">Perusahaan</th><th className="p-4">Urutan</th><th className="p-4">Aksi</th></tr></thead><tbody>
-        {initialData.map(item => <tr key={item.id} className="border-t border-white/10"><td className="p-4 font-medium">{item.title}</td><td className="p-4 text-gray-400">{item.company}</td><td className="p-4 text-gray-400">{item.order}</td><td className="p-4"><div className="flex gap-3"><button onClick={() => setDetail(item)} className="text-cyan-300">Detail</button><button onClick={() => { setEditing(item); setError(''); }} className="text-gray-200">Edit</button><button onClick={() => remove(item.id)} className="text-red-400">Hapus</button></div></td></tr>)}
+        {initialData.map(item => <tr key={item.id} className="border-t border-white/10"><td className="p-4 font-medium">{item.title}</td><td className="p-4 text-gray-400">{item.company}</td><td className="p-4 text-gray-400">{item.order}</td><td className="p-4"><div className="flex gap-3"><button onClick={() => setDetail(item)} className="text-cyan-300">Detail</button><button onClick={() => { setEditing(item); setError(''); }} className="text-gray-200">Edit</button><button onClick={() => setDeleting(item)} className="text-red-400">Hapus</button></div></td></tr>)}
       </tbody></table>
       {initialData.length === 0 && <p className="p-6 text-gray-500">Belum ada pengalaman.</p>}
     </div>
+    <AdminDeleteDialog item={deleting?.title ?? null} pending={deletePending} onCancel={() => setDeleting(null)} onConfirm={remove} />
     {detail && <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 p-5" role="dialog" aria-modal="true" aria-label="Detail pengalaman" onClick={() => setDetail(null)}><div className="glass-card w-full max-w-lg p-6" onClick={event => event.stopPropagation()}><h3 className="text-xl font-bold">{detail.title}</h3><p className="mt-1 text-cyan-300">{detail.company}</p><p className="mt-4 whitespace-pre-wrap text-sm leading-relaxed text-gray-300">{detail.description}</p><p className="mt-3 text-xs text-gray-500">Urutan {detail.order}</p><button onClick={() => setDetail(null)} className="glass-button mt-5 rounded-lg px-4 py-2">Tutup</button></div></div>}
   </div>;
 }
