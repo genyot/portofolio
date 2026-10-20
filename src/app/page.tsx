@@ -42,17 +42,7 @@ const defaultSkills = [
   { name: "Snapseed", icon: SlidersHorizontal, highlight: false },
 ];
 
-const socials = [
-  { href: "https://github.com/genyot", icon: FaGithub, label: "GitHub" },
-  { href: "https://www.linkedin.com/in/muhammad-ridho-ramdene-4b40663ba", icon: FaLinkedin, label: "LinkedIn" },
-  { href: "https://www.instagram.com/g3ny0t", icon: FaInstagram, label: "Instagram" },
-  { href: "https://wa.me/+6281917320266", icon: FaWhatsapp, label: "WhatsApp" },
-  { href: "https://pin.it/4R3TYSukt", icon: FaPinterest, label: "Pinterest" },
-  { href: "https://www.facebook.com/ridho.ramdana.37", icon: FaFacebook, label: "Facebook" },
-  { href: "https://t.me/g3nyot", icon: FaTelegram, label: "Telegram" },
-  { href: "https://www.threads.com/@4p0f4s1s", icon: FaThreads, label: "Threads" },
-  { href: "https://www.tiktok.com/@apofasis", icon: FaTiktok, label: "TikTok" },
-];
+const socialIcons: Record<string, typeof FaGithub> = { FaGithub, FaLinkedin, FaInstagram, FaWhatsapp, FaPinterest, FaFacebook, FaTelegram, FaThreads, FaTiktok };
 
 
 const defaultServices = [
@@ -79,12 +69,13 @@ const defaultServices = [
 ];
 
 export default async function Home() {
-  const [dbExperiences, dbSkills, dbServices, profile, playlists] = await Promise.all([
+  const [dbExperiences, dbSkills, dbServices, profile, playlists, socials] = await Promise.all([
     prisma.experience.findMany({ orderBy: { order: 'asc' } }),
     prisma.skill.findMany({ orderBy: { order: 'asc' } }),
     prisma.service.findMany({ orderBy: { order: 'asc' } }),
     prisma.siteProfile.findUnique({ where: { id: 'main' } }),
     prisma.playlist.findMany({ orderBy: { order: 'asc' } }),
+    prisma.socialLink.findMany({ orderBy: { order: 'asc' } }),
   ]);
   const experiencesToDisplay = dbExperiences;
   const skillsToDisplay = dbSkills.length > 0 ? dbSkills : defaultSkills;
@@ -263,19 +254,20 @@ export default async function Home() {
           <p className="mt-3 text-sm text-gray-400">Temukan saya di berbagai platform.</p>
         </div>
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-          {socials.map((s, i) => (
-            <a
-              key={s.label}
+          {socials.map((s, i) => {
+            const Icon = socialIcons[s.icon];
+            return <a
+              key={s.id}
               href={s.href}
               target="_blank"
               rel="noopener noreferrer"
               className="glass-card animate-fade-up group flex flex-col items-center justify-center gap-3 py-8 transition-all"
               style={{ animationDelay: `${i * 60}ms` }}
             >
-              <s.icon size={32} className="text-gray-300 transition-transform duration-300 group-hover:scale-110 group-hover:text-cyan-400" />
+              {Icon ? <Icon size={32} className="text-gray-300 transition-transform duration-300 group-hover:scale-110 group-hover:text-cyan-400" /> : <span aria-hidden="true" className="text-3xl text-gray-300">↗</span>}
               <span className="text-xs font-medium text-gray-400 group-hover:text-white">{s.label}</span>
-            </a>
-          ))}
+            </a>;
+          })}
         </div>
       </section>
 
