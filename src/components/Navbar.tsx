@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -21,9 +22,9 @@ export default function Navbar() {
     <>
       <nav className="glass-navbar sticky top-0 z-50 w-full px-5 py-4 md:px-12">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
-          <a href="/" className="animate-fade-up font-serif text-2xl font-bold text-white md:text-3xl">
+          <Link href="/" className="animate-fade-up font-serif text-2xl font-bold text-white md:text-3xl">
             MR<span className="text-cyan-400">.</span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="animate-fade-up animation-delay-100 hidden items-center gap-8 text-sm font-medium text-gray-300 md:flex">

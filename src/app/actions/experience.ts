@@ -59,7 +59,7 @@ export async function deleteExperience(id: string) {
     revalidatePath('/');
     revalidatePath('/admin');
     return { success: true };
-  } catch (e) {
+  } catch {
     return { error: 'Gagal menghapus pengalaman' };
   }
 }

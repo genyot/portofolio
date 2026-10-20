@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import Image from "next/image";
+
 import DesignGallery from "@/components/DesignGallery";
 import MusicPlayer from "@/components/MusicPlayer";
 import Navbar from "@/components/Navbar";
@@ -208,7 +208,7 @@ export default async function Home() {
       <section id="experience" className="mx-auto max-w-6xl px-5 py-20 text-left relative z-10 md:py-32">
         <h2 className="animate-fade-up mb-10 font-serif text-3xl font-bold md:mb-16 md:text-4xl">Experience</h2>
         <div className="space-y-6 md:space-y-10">
-          {experiencesToDisplay.map((exp: any, i) => (
+          {experiencesToDisplay.map((exp, i) => (
             <div
               key={exp.id || i}
               className="glass-card animate-fade-up relative p-5 md:p-6"
