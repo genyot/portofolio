@@ -76,10 +76,10 @@ export default function ImageCropInput({ name, aspect = 1, required = false, lab
     }} />
     {cropped && <p className="mt-1 text-xs text-cyan-300">Crop siap diunggah: {cropped.name}</p>}
     {error && <p role="alert" className="mt-1 text-xs text-red-400">{error}</p>}
-    {source && <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/85 p-4" role="dialog" aria-modal="true" aria-labelledby={`${name}-crop-title`}>
-      <div className="glass-card w-full max-w-xl p-5">
+    {source && <div className="fixed inset-0 z-80 flex items-center justify-center overflow-y-auto bg-black/85 p-3 sm:p-4" role="dialog" aria-modal="true" aria-labelledby={`${name}-crop-title`}>
+      <div className="glass-card my-auto w-full max-w-xl p-4 sm:p-5">
         <h2 id={`${name}-crop-title`} className="text-lg font-semibold">Atur crop gambar</h2>
-        <canvas ref={canvasRef} className="mt-4 max-h-[55vh] w-full rounded-lg bg-black object-contain" style={{ aspectRatio: String(aspect) }} />
+        <canvas ref={canvasRef} className="mt-4 max-h-[40vh] w-full rounded-lg bg-black object-contain sm:max-h-[55vh]" style={{ aspectRatio: String(aspect) }} />
         <label className="mt-4 block text-xs">Zoom <input type="range" min="1" max="3" step="0.01" value={zoom} onChange={event => setZoom(Number(event.target.value))} className="ml-3 align-middle" /></label>
         <label className="mt-3 block text-xs">Geser horizontal <input type="range" min="0" max="100" value={x} onChange={event => setX(Number(event.target.value))} className="ml-3 align-middle" /></label>
         <label className="mt-3 block text-xs">Geser vertikal <input type="range" min="0" max="100" value={y} onChange={event => setY(Number(event.target.value))} className="ml-3 align-middle" /></label>
