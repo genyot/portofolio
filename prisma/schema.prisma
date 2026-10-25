@@ -28,9 +28,12 @@ model Experience {
 model Portfolio {
   id        String   @id @default(cuid())
   title     String
-  category  String
-  image     String
-  aspect    String   @default("aspect-square")
+  category    String
+  image       String
+  type        String   @default("design")
+  description String?
+  demoUrl     String?
+  aspect      String   @default("aspect-square")
   order     Int      @default(0)
   createdAt DateTime @default(now())
 }

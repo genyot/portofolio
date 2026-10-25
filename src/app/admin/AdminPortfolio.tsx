@@ -5,7 +5,7 @@ import Image from 'next/image';
 import AdminDeleteDialog from '@/components/AdminDeleteDialog';
 import { addPortfolio, deletePortfolio, updatePortfolio } from '@/app/actions/portfolio';
 
-type Item = { id: string; title: string; category: string; image: string; aspect: string; order: number };
+type Item = { id: string; title: string; category: string; image: string; aspect: string; order: number; type: string; description: string | null; demoUrl: string | null };
 const input = 'w-full rounded-lg border border-white/10 bg-black/40 p-3 text-sm text-white outline-none focus:border-cyan-400/50';
 
 export default function AdminPortfolio({ initialData }: { initialData: Item[] }) {
@@ -40,6 +40,9 @@ export default function AdminPortfolio({ initialData }: { initialData: Item[] })
       <h3 className="font-semibold">{editing ? 'Edit karya' : 'Tambah karya'}</h3>
       <input name="title" required defaultValue={editing?.title ?? ''} placeholder="Judul Karya" className={input} />
       <input name="category" required defaultValue={editing?.category ?? ''} placeholder="Kategori" className={input} />
+      <select name="type" defaultValue={editing?.type ?? 'design'} className={input}><option value="design">Desain</option><option value="website">Website</option></select>
+      <textarea name="description" defaultValue={editing?.description ?? ''} placeholder="Deskripsi singkat (opsional)" rows={3} className={input} />
+      <input name="demoUrl" type="url" defaultValue={editing?.demoUrl ?? ''} placeholder="URL demo website (wajib untuk jenis website)" className={input} />
       <select name="aspect" defaultValue={editing?.aspect ?? 'aspect-square'} className={input}>
         <option value="aspect-square">Square (1:1)</option><option value="aspect-[4/5]">Portrait (4:5)</option><option value="aspect-[3/4]">Portrait (3:4)</option><option value="aspect-video">Landscape (16:9)</option>
       </select>
@@ -51,7 +54,7 @@ export default function AdminPortfolio({ initialData }: { initialData: Item[] })
     </form>
     <div className="overflow-x-auto rounded-xl border border-white/10">
       <table className="w-full min-w-[620px] text-left text-sm"><thead className="bg-white/5 text-xs uppercase text-gray-400"><tr><th className="p-4">Karya</th><th className="p-4">Kategori</th><th className="p-4">Urutan</th><th className="p-4">Aksi</th></tr></thead><tbody>
-        {initialData.map(item => <tr key={item.id} className="border-t border-white/10"><td className="p-4"><div className="flex items-center gap-3"><div className="relative h-12 w-12 overflow-hidden rounded-lg"><Image src={item.image} alt={item.title} fill unoptimized className="object-cover" /></div><span className="font-medium">{item.title}</span></div></td><td className="p-4 text-gray-400">{item.category}</td><td className="p-4 text-gray-400">{item.order}</td><td className="p-4"><div className="flex gap-3"><button onClick={() => setDetail(item)} className="text-cyan-300">Detail</button><button onClick={() => { setEditing(item); setError(''); }} className="text-gray-200">Edit</button><button onClick={() => setDeleting(item)} className="text-red-400">Hapus</button></div></td></tr>)}
+        {initialData.map(item => <tr key={item.id} className="border-t border-white/10"><td className="p-4"><div className="flex items-center gap-3"><div className="relative h-12 w-12 overflow-hidden rounded-lg"><Image src={item.image} alt={item.title} fill unoptimized className="object-cover" /></div><span className="font-medium">{item.title}<small className="block text-gray-500">{item.type === 'website' ? 'Website' : 'Desain'}</small></span></div></td><td className="p-4 text-gray-400">{item.category}</td><td className="p-4 text-gray-400">{item.order}</td><td className="p-4"><div className="flex gap-3"><button onClick={() => setDetail(item)} className="text-cyan-300">Detail</button><button onClick={() => { setEditing(item); setError(''); }} className="text-gray-200">Edit</button><button onClick={() => setDeleting(item)} className="text-red-400">Hapus</button></div></td></tr>)}
       </tbody></table>
       {initialData.length === 0 && <p className="p-6 text-gray-500">Belum ada karya.</p>}
     </div>

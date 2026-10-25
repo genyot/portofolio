@@ -10,7 +10,7 @@ export default async function DesignGallery() {
       <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
         {designs.map((design) => (
           <article
-            key={design.title}
+            key={design.id}
             className="group mb-5 break-inside-avoid animate-fade-up"
             style={{ animationDelay: "200ms" }}
           >
@@ -36,6 +36,8 @@ export default async function DesignGallery() {
                   <h3 className="mt-1 font-serif text-lg text-white">
                     {design.title}
                   </h3>
+                  {design.description && <p className="mt-2 text-sm text-gray-300">{design.description}</p>}
+                  {design.type === 'website' && design.demoUrl && <a href={design.demoUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex rounded-lg bg-cyan-400/20 px-4 py-2 text-sm font-medium text-cyan-200 hover:bg-cyan-400/30">Lihat Website<span className="sr-only"> {design.title}</span></a>}
                 </div>
               </div>
             </div>
@@ -43,11 +45,7 @@ export default async function DesignGallery() {
         ))}
       </div>
 
-      <div className="mt-12 flex justify-center animate-fade-up animation-delay-300">
-        <button className="glass-button rounded-lg px-8 py-3 text-sm font-medium text-white">
-          View More
-        </button>
-      </div>
+
     </section>
   );
 }
