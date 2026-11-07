@@ -7,12 +7,28 @@ import { put } from '@vercel/blob';
 
 export async function savePlaylist(id: string | null, formData: FormData) {
   if (!(await isAdminAuthenticated())) return { error: 'Tidak diizinkan.' };
-  const spotifyId = String(formData.get('spotifyId') ?? '').trim();
+  const platform = String(formData.get('platform') ?? 'spotify');
+  const playlistUrl = String(formData.get('playlistUrl') ?? '').trim();
   const title = String(formData.get('title') ?? '').trim();
   const subtitle = String(formData.get('subtitle') ?? '').trim();
   const order = Number(formData.get('order') ?? 0);
-  if (!/^[A-Za-z0-9]{10,}$/.test(spotifyId) || !title || !subtitle || !Number.isInteger(order)) return { error: 'Data playlist tidak valid.' };
-  const data = { spotifyId, title, subtitle, order };
+  let spotifyId = '';
+  if (platform === 'spotify') {
+    try {
+      const url = new URL(playlistUrl);
+      const match = url.hostname === 'open.spotify.com' && url.pathname.match(/^\/playlist\/([A-Za-z0-9]+)\/?$/);
+      if (!match) throw new Error();
+      spotifyId = match[1];
+    } catch { return { error: 'Masukkan link playlist Spotify yang valid.' }; }
+  } else if (platform === 'youtube') {
+    try {
+      const url = new URL(playlistUrl);
+      if (!['youtube.com', 'www.youtube.com', 'm.youtube.com'].includes(url.hostname) || url.pathname !== '/playlist' || !url.searchParams.get('list')) throw new Error();
+      spotifyId = url.searchParams.get('list')!;
+    } catch { return { error: 'Masukkan link playlist YouTube yang valid.' }; }
+  } else return { error: 'Pilih platform musik yang valid.' };
+  if (!title || !subtitle || !Number.isInteger(order)) return { error: 'Data playlist tidak valid.' };
+  const data = { platform, spotifyId, title, subtitle, order };
   if (id) await prisma.playlist.update({ where: { id }, data }); else await prisma.playlist.create({ data });
   revalidatePath('/'); revalidatePath('/music'); revalidatePath('/admin/music');
   return { success: true };

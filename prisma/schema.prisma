@@ -57,9 +57,10 @@ model Skill {
 }
 
 model Playlist {
-  id       String @id @default(cuid())
+  id        String @id @default(cuid())
+  platform  String @default("spotify")
   spotifyId String
-  title    String
+  title     String
   subtitle String
   color    String @default("from-yellow-500/20 to-green-600/10")
   glow     String @default("rgba(234,179,8,0.3)")

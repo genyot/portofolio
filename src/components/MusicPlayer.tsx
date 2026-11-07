@@ -1,4 +1,4 @@
-type Playlist = { id: string; spotifyId: string; title: string; subtitle: string; color: string; glow: string };
+type Playlist = { id: string; platform: string; spotifyId: string; title: string; subtitle: string; color: string; glow: string };
 
 export default function MusicPlayer({ playlists = [] }: { playlists?: Playlist[] }) {
   return (
@@ -35,13 +35,14 @@ export default function MusicPlayer({ playlists = [] }: { playlists?: Playlist[]
               </div>
             </div>
 
-            {/* Spotify Embed */}
             <iframe
-              src={`https://open.spotify.com/embed/playlist/${pl.spotifyId}?utm_source=generator&theme=0`}
+              title={`${pl.title} - ${pl.platform === 'youtube' ? 'YouTube' : 'Spotify'}`}
+              src={pl.platform === 'youtube' ? `https://www.youtube-nocookie.com/embed/videoseries?list=${encodeURIComponent(pl.spotifyId)}` : `https://open.spotify.com/embed/playlist/${encodeURIComponent(pl.spotifyId)}?utm_source=generator&theme=0`}
               width="100%"
-              height="352"
+              height={pl.platform === 'youtube' ? '352' : '352'}
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
               className="border-0"
             />
           </div>
